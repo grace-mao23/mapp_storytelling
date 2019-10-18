@@ -1,2 +1,5 @@
-prathamR -- 2019-18-10 8:21
+prathamR -- 2019-18-10 08:21
 Create file for Dev Log
+
+prathamR -- 2019-10-18 08:38
+Add script to update devlog
