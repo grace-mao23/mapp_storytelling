@@ -15,3 +15,7 @@ Added method createAccount(, , ,)
 DavidX -- 2019-10-19 18:21
 added method loginAccount( , )
 
+
+KelvinN -- 2019-10-19 18:58
+Added routes, sessions, and removes sessions when logging out.
+
