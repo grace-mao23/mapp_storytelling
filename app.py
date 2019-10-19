@@ -84,7 +84,7 @@ def createAccount(username, password, passwdverf):
         addRow("accounts", (username, password))
         return "account created"
 
-@app.route("/login")
+@app.route("/login", methods="POST")
 def loginAccount(username, password):
     command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
     fetched = c.fetchall()
@@ -103,7 +103,7 @@ def loginAccount(username, password):
 def loggingOut():
     session.pop('username')		#removes session when logging out
     flash("You have successfully logged out!")
-	return render_template('login.html')	#redircts to login page
+	return redirect("/")	#redircts to login page
 
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
