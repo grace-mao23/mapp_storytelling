@@ -13,6 +13,6 @@ timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
 devlogFile = open("devlog.txt", "a")
 
 devlogFile.write("\n" + name + " -- " + timestamp + "\n")
-devlogFile.write(update)
+devlogFile.write(update+"\n")
 
 devlogFile.close()
