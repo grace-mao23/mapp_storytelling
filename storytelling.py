@@ -61,7 +61,7 @@ buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
 
 #d# takes in three strings and reads from table accounts
 def createAccount(username, password, passwdverf):
-  command("SELECT accounts.username FROM accounts WHERE accounts.username = \'{}\'".format(username))
+  command("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
   if len(c.fetchall()) > 0:
     #c# flash message here
     return "username exists"
@@ -72,11 +72,29 @@ def createAccount(username, password, passwdverf):
     addRow("accounts", (username, password))
     return "account created"
 
+def loginAccount(username, password):
+  command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
+  fetched = c.fetchall()
+  if len(fetched) < 1:
+    #c# flash message here
+    return "username does not exist"
+  elif fetched[0][0] != password:
+    #c# flash message here
+    return "password is incorrect"
+  else:
+    #c# cache login here
+    return "login successful"
+    
 #c# testing account creation    
 #x# print (createAccount("d", "d", "d")) 
 #x# print (createAccount("d", "d", "d")) #c# should say exists
 #x# print (createAccount("doof", "d", "ddd")) #c# passes don't match
 #x# print (createAccount("doof", "d", "d")) #c#  
-  
+
+#c# testing account login
+#x# print (loginAccount("dododd","D")) #c# bad user 
+#x# print (loginAccount("d","D")) #c# bad pass
+#x# print (loginAccount("d","d"))
+
 db.close()  #close database
 #c# Bottom of DB Code
