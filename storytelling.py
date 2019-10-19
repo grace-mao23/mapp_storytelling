@@ -5,12 +5,9 @@
 
 import sqlite3
 
-
-
-#b# Database Code ==========================================================
+#b# ========================================================================
 
 #b# Database Interaction ===================================================
-
 db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
 c = db.cursor()
 
@@ -45,18 +42,41 @@ def addRow(table, val):
   command(toDo)
   commit()
 
-#c# testing
+#c# testing 
 #x# comm("CREATE TABLE wry(testInt INTEGER)")
 #x# commit()
 
 #c# testing buildTable 
-testCols = {"t1": "TEXT", "t2": "INTEGER", "t3":"INTEGER"}
+#x# testCols = {"t1": "TEXT", "t2": "INTEGER", "t3":"INTEGER"}
 #x# print (buildTable("HeWo", testCols))
-buildTable("HeWo", testCols)
+#x# buildTable("HeWo", testCols)
 
 #c# testing addRow
-testRow = ("UwU", 10, 24)
-addRow("HeWo", testRow)
+#x# testRow = ("UwU", 10, 24)
+#x# addRow("HeWo", testRow)
 
+#b# Accounts Table Code ====================================================
+
+buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
+
+#d# takes in three strings and reads from table accounts
+def createAccount(username, password, passwdverf):
+  command("SELECT accounts.username FROM accounts WHERE accounts.username = \'{}\'".format(username))
+  if len(c.fetchall()) > 0:
+    #c# flash message here
+    return "username exists"
+  elif password != passwdverf:
+    #c# flash message here
+    return "password does not match"
+  else:
+    addRow("accounts", (username, password))
+    return "account created"
+
+#c# testing account creation    
+#x# print (createAccount("d", "d", "d")) 
+#x# print (createAccount("d", "d", "d")) #c# should say exists
+#x# print (createAccount("doof", "d", "ddd")) #c# passes don't match
+#x# print (createAccount("doof", "d", "d")) #c#  
+  
 db.close()  #close database
 #c# Bottom of DB Code
