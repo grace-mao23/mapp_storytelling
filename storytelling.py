@@ -103,7 +103,7 @@ def loginAccount(username, password):
 def loggingOut():
     session.pop('username')		#removes session when logging out
     flash("You have successfully logged out!")
-	return render_template('login.html')	#redircts to login page
+    return render_template('login.html')	#redircts to login page
 
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
