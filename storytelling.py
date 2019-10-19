@@ -17,8 +17,8 @@ def commit():
   
 #d# calls c.execute(command)
 def command(command):
-  c.execute(command)  
-  
+  c.execute(command)
+
 #d# create table and remove table if exists
 #d# takes in a filename and the key(dict)
 def buildTable(name, kc):
