@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> mapp storytelling </title>
+  </head>
+  <body>
+    <center><h1><br>Login to <i>mapp Storytelling!</i></h1></center>
+    <br>
+    {% errors = get_flashed_messages() %}
+      {% if errors %}
+        {% for error in errors %}
+          <center><h4><font color="red">{{error message}}</font></h4></center>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <br>
+    <center>
+    <form action="/login" method="post">
+      <h3>Username: <input type="text" name="username"></h3>
+      <h3>Password: <input type="password" name="password"></h3>
+      <input type="submit" name="submit">
+    </form>
+    </center>
+  </body>
+</html>
