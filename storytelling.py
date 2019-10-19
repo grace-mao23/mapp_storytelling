@@ -9,6 +9,7 @@ import sqlite3
 
 #b# Database Code ==========================================================
 
+#b# Database Interaction ===================================================
 
 db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
 c = db.cursor()
@@ -31,14 +32,31 @@ def buildTable(name, kc):
   command(toBuild)
   commit()
 
+#d# adds data to table, whole row insertion
+#d# takes string table, and list val 
+def addRow(table, val):
+  toDo = "INSERT INTO {} VALUES (".format(table)
+  for el in val:
+    if type(el) == int:
+      toDo = toDo + str(el) + ", "
+    else:
+      toDo = toDo + "\'" + el + "\'" + ", "
+  toDo = toDo[:-2] + ")"
+  command(toDo)
+  commit()
+
 #c# testing
 #x# comm("CREATE TABLE wry(testInt INTEGER)")
 #x# commit()
 
 #c# testing buildTable 
-testChain = {"t1": "TEXT", "t2": "INTEGER", "t3":"INTEGER"}
-#x# print (buildTable("HeWo", testChain))
-buildTable("HeWo", testChain)
+testCols = {"t1": "TEXT", "t2": "INTEGER", "t3":"INTEGER"}
+#x# print (buildTable("HeWo", testCols))
+buildTable("HeWo", testCols)
+
+#c# testing addRow
+testRow = ("UwU", 10, 24)
+addRow("HeWo", testRow)
 
 db.close()  #close database
 #c# Bottom of DB Code
