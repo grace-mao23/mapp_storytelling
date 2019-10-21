@@ -21,3 +21,6 @@ Added routes, sessions, and removes sessions when logging out.
 
 prathamR -- 2019-10-19 19:33
 Create index.html, rename python file to app.py and make small changes to routing
+
+prathamR -- 2019-10-21 07:57
+Add update log to folder
