@@ -1,4 +1,4 @@
-#iYagi by mapp
+# iYagi by mapp
 
 Person | Role
 ------ | ----
