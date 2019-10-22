@@ -7,13 +7,9 @@
   <body>
     <center><h1><br>Login to <i>mapp Storytelling!</i></h1></center>
     <br>
-    {% errors = get_flashed_messages() %}
-      {% if errors %}
-        {% for error in errors %}
-          <center><h4><font color="red">{{error message}}</font></h4></center>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    {% for error in get_flashed_messages() %}
+          <center><h4><font color="red">{{error}}</font></h4></center>
+    {% endfor %}
     <br>
     <center>
     <form action="/login" method="post">
