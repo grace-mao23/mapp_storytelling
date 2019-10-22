@@ -1,12 +1,9 @@
 #iYagi by mapp
 
-###Roles:
-
-Junhee Lee: Project Manager
-
-Pratham Rawat: Frontend + Integration to Backend
-
-David Xiedeng: Backend (Routing, Form Management, SQLite)
-
-Kelvin Ng: Backend (Querying, Cookies)
+Person | Role
+------ | ----
+Junhee Lee | Project Manager
+Pratham Rawat | Frontend + Integration to Backend
+David Xiedeng | Backend (Routing, Form Management, SQLite)
+Kelvin Ng | Backend (Querying, Cookies)
 
