@@ -46,3 +46,6 @@ team -- 2019-10-22 07:56
 Post-Reading:
 1) will improve communication and documentation so we don't break things accidentally
 2) Acknowledge that code won't be perfect and settle for "working"
+
+prathamR -- 2019-10-22 08:40
+Create Jinja Inheritance for login and create account pages,links
