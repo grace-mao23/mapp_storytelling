@@ -3,15 +3,24 @@
 # P#00 - Da Art of Storytellin'
 # 2019-10-28
 
-from flask import Flask, render_template, session, flash
+from flask import Flask, render_template, session, flash, request
 import sqlite3, os
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
 #b# ========================================================================
+#b# Site Interaction
 
+@app.route("/login", methods=["POST"])
+def login():
+    print (request.method)
+    print (request.args)
+    return render_template('login.html') #returns to login page if user is not logged in
+
+#b# Site Interaction
 #b# Database Interaction ===================================================
+
 db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
 c = db.cursor()
 
@@ -84,7 +93,6 @@ def createAccount(username, password, passwdverf):
         addRow("accounts", (username, password))
         return "account created"
 
-@app.route("/login", methods=["POST"])
 def loginAccount(username, password):
     command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
     fetched = c.fetchall()
