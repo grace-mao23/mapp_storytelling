@@ -5,18 +5,26 @@
     <title> mapp storytelling </title>
   </head>
   <body>
-    <center><h1><br>Login to <i>mapp Storytelling!</i></h1></center>
-    <br>
-    {% for error in get_flashed_messages() %}
-          <center><h4><font color="red">{{error}}</font></h4></center>
-    {% endfor %}
-    <br>
-    <center>
-    <form action="/login" method="post">
-      <h3>Username: <input type="text" name="username"></h3>
-      <h3>Password: <input type="password" name="password"></h3>
-      <input type="submit" value="Login">
-    </form>
-    </center>
+    {% block heading %}
+    	<center><h1><br>Login to <i>mapp Storytelling!</i></h1></center>
+    	<br>
+    {% endblock %}
+
+    {% block errorMessages %}
+      {% for error in get_flashed_messages() %}
+            <center><h4><font color="red">{{error}}</font></h4></center>
+      {% endfor %}
+    {% endblock %}
+
+    {%block inputs%}
+      <br>
+      <center>
+      <form action="/login" method="post">
+        <h3>Username: <input type="text" name="username"></h3>
+        <h3>Password: <input type="password" name="password"></h3>
+        <input type="submit" value="Login">
+      </form>
+      </center>
+    {%endblock%}
   </body>
 </html>
