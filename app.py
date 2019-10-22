@@ -65,20 +65,20 @@ buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
 
 @app.route("/")
 def loggingIn():
-	if 'username' in session:
+    if 'username' in session:
         flash("Hello " + session['username'] + "!")
-		return render_template('homepage.html') #user is redirected to the response page if logged in
-	return render_template('login.html') #returns to login page if user is not logged in
+        return render_template('homepage.html') #user is redirected to the response page if logged in
+    return render_template('login.html') #returns to login page if user is not logged in
 
 @app.route("/create")
 #d# takes in three strings and reads from table accounts
 def createAccount(username, password, passwdverf):
     command("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
     if len(c.fetchall()) > 0:
-    #c# flash message here
+        #c# flash message here
         return "username exists"
     elif password != passwdverf:
-    #c# flash message here
+        #c# flash message here
         return "password does not match"
     else:
         addRow("accounts", (username, password))
@@ -89,10 +89,10 @@ def loginAccount(username, password):
     command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
     fetched = c.fetchall()
     if len(fetched) < 1:
-    #c# flash message here
+        #c# flash message here
         return "username does not exist"
     elif fetched[0][0] != password:
-    #c# flash message here
+        #c# flash message here
         return "password is incorrect"
     else:
         session['username'] = username  #starts a session if user inputs correct existing username and password
@@ -103,7 +103,7 @@ def loginAccount(username, password):
 def loggingOut():
     session.pop('username')		#removes session when logging out
     flash("You have successfully logged out!")
-	return redirect("/")	#redircts to login page
+    return redirect("/")	#redircts to login page
 
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
@@ -120,5 +120,5 @@ db.close()  #close database
 #c# Bottom of DB Code
 
 if __name__ == "__main__":
-	app.debug = True
-	app.run()
+    app.debug = True
+    app.run()
