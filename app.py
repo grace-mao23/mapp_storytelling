@@ -33,11 +33,16 @@ def login():
     #x# print (request.method)
 	loginCode = loginAccount(request.form["username"], request.form["password"])
 	#c# bad login
-	#x# 
-	print (loginCode)
+	#x# print (loginCode)
 	flash(loginCode)
 	#x# render_template('homepage.html') #redirects to homepage if good login 
 	return render_template('login.html') #returns to login page if user is not logged in
+
+@app.route("/create", methods=["POST"])
+def signUp():
+	signUpCode = createAccount(request.form["username"], request.form["password"], request.form["password2"])
+	flash(signUpCode)
+	return render_template("createAccount.html")
 
 #b# Site Interaction
 #b# ========================================================================
@@ -91,13 +96,21 @@ def addRow(table, val):
 
 buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
 
-@app.route("/create")
-#d# takes in three strings and reads from table accounts
+
+#d# takes in three strings and reads from table accounts if data exists
+#d# creates account if suitable input is provided
+#d# returns String message
 def createAccount(username, password, passwdverf):
-    
-	command("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
-	
-	if len(c.fetchall()) > 0:
+	db = sqlite3.connect("mapp_site.db")
+	c = db.cursor()
+	c.execute("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
+	fetched = c.fetchall()
+	db.close()
+	if len(username) < 1:
+		return "username too short"
+	elif len(password) < 1:
+		return "password too short"
+	elif len(fetched) > 0:
         #c# flash message here
 		return "username exists"
 	elif password != passwdverf:

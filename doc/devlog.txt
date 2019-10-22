@@ -49,3 +49,12 @@ Post-Reading:
 
 prathamR -- 2019-10-22 08:40
 Create Jinja Inheritance for login and create account pages,links
+
+DavidX -- 2019-10-22 18:58
+Have /login working for bad logins
+
+DavidX -- 2019-10-22 19:13
+Modified createAccount for string output and added cases of short usernames and passwords
+
+DavidX -- 2019-10-22 19:19
+Tested account creation; appears to work
