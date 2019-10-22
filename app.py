@@ -14,8 +14,11 @@ app.secret_key = os.urandom(32)
 
 @app.route("/login", methods=["POST"])
 def login():
-    print (request.method)
-    print (request.args)
+    #x# print (request)
+    #x# print (request.form)
+    #c# use .form when method is post
+    #x# print (request.method)
+    #x# print (request.args)
     return render_template('login.html') #returns to login page if user is not logged in
 
 #b# Site Interaction
