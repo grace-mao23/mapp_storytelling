@@ -8,32 +8,62 @@ import sqlite3, os
 
 app = Flask(__name__)
 
+db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
+c = db.cursor()
+
 app.secret_key = os.urandom(32)
 #b# ========================================================================
 #b# Site Interaction
 
+@app.route("/")
+def loggingIn():
+    if 'username' in session:
+        flash("Hello " + session['username'] + "!")
+        return render_template('homepage.html') #user is redirected to the response page if logged in
+    return render_template('login.html') #returns to login page if user is not logged in
+
+#d# two post inputs username and password
+#d# returns to itself and flashes errors if bad login
+#d# goes to homepage with successful login
 @app.route("/login", methods=["POST"])
 def login():
     #x# print (request)
     #x# print (request.form)
     #c# use .form when method is post
     #x# print (request.method)
-    #x# print (request.args)
-    return render_template('login.html') #returns to login page if user is not logged in
+	#x# print (request.form["username"], request.form["password"])
+	user = request.form["username"]
+	passw = request.form["password"]
+	print (type(user), type(passw))
+	#x# 
+	loginCode = loginAccount(user, passw)
+	#c# bad login
+	#x# 
+	print (loginCode)
+	return render_template('login.html') #returns to login page if user is not logged in
 
 #b# Site Interaction
-#b# Database Interaction ===================================================
+#b# ========================================================================
+#b# Database Interaction 
 
-db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
-c = db.cursor()
+def openDB():
+	db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
+	c = db.cursor()
 
+def closeDB():
+	db.close()
+	
 #d# save changes
 def commit():
     db.commit()
 
 #d# calls c.execute(command)
 def command(command):
-    c.execute(command)
+	db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
+	c = db.cursor()
+	c.execute(command)
+	db.commit()
+	db.close()
 
 #d# create table and remove table if exists
 #d# takes in a filename and the key(dict)
@@ -71,44 +101,49 @@ def addRow(table, val):
 #x# testRow = ("UwU", 10, 24)
 #x# addRow("HeWo", testRow)
 
-#b# Accounts Table Code ====================================================
+#b# Database Interaction
+#b# ========================================================================
+#b# Accounts Table Code
 
 buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
-
-@app.route("/")
-def loggingIn():
-    if 'username' in session:
-        flash("Hello " + session['username'] + "!")
-        return render_template('homepage.html') #user is redirected to the response page if logged in
-    return render_template('login.html') #returns to login page if user is not logged in
 
 @app.route("/create")
 #d# takes in three strings and reads from table accounts
 def createAccount(username, password, passwdverf):
-    command("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
-    if len(c.fetchall()) > 0:
+    
+	command("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
+	
+	if len(c.fetchall()) > 0:
         #c# flash message here
-        return "username exists"
-    elif password != passwdverf:
+		return "username exists"
+	elif password != passwdverf:
         #c# flash message here
-        return "password does not match"
-    else:
-        addRow("accounts", (username, password))
-        return "account created"
+		return "password does not match"
+	else:
+		addRow("accounts", (username, password))
+		return "account created"
 
+#d# takes in two strings and verifies presence in database
+#d# returns int: 0 (bad user), 1 (bad pass), or 2 (success)
 def loginAccount(username, password):
-    command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
-    fetched = c.fetchall()
-    if len(fetched) < 1:
+	db = sqlite3.connect("mapp_site.db")
+	c = db.cursor()
+	c.execute("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
+	fetched = c.fetchall()
+	db.close()
+	if len(fetched) < 1:
         #c# flash message here
-        return "username does not exist"
-    elif fetched[0][0] != password:
+		#c# "username does not exist"
+		return 0
+	elif fetched[0][0] != password:
         #c# flash message here
-        return "password is incorrect"
-    else:
-        session['username'] = username  #starts a session if user inputs correct existing username and password
-        flash("Hello " + session['username'] + "! You have successfully logged in.")
-        return render_template('homepage.html')     #redirects to homepage
+		#x# "password is incorrect"
+		return 1
+	else:
+        #x# session['username'] = username  #starts a session if user inputs correct existing username and password
+        #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
+		#x# render_template('homepage.html')     #redirects to homepage
+		return 2
 
 @app.route("/logout")
 def loggingOut():
@@ -125,7 +160,11 @@ def loggingOut():
 #c# testing account login
 #x# print (loginAccount("dododd","D")) #c# bad user
 #x# print (loginAccount("d","D")) #c# bad pass
+#x# 
 #x# print (loginAccount("d","d"))
+
+#b# Accounts Table Code
+#b# ========================================================================
 
 db.close()  #close database
 #c# Bottom of DB Code
