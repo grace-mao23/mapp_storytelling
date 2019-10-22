@@ -31,31 +31,17 @@ def login():
     #x# print (request.form)
     #c# use .form when method is post
     #x# print (request.method)
-	#x# print (request.form["username"], request.form["password"])
-	user = request.form["username"]
-	passw = request.form["password"]
-	print (type(user), type(passw))
-	#x# 
-	loginCode = loginAccount(user, passw)
+	loginCode = loginAccount(request.form["username"], request.form["password"])
 	#c# bad login
 	#x# 
 	print (loginCode)
+	flash(loginCode)
+	#x# render_template('homepage.html') #redirects to homepage if good login 
 	return render_template('login.html') #returns to login page if user is not logged in
 
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction 
-
-def openDB():
-	db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
-	c = db.cursor()
-
-def closeDB():
-	db.close()
-	
-#d# save changes
-def commit():
-    db.commit()
 
 #d# calls c.execute(command)
 def command(command):
@@ -73,7 +59,6 @@ def buildTable(name, kc):
         toBuild = toBuild + "{} {}, ".format(el, kc[el])
     toBuild = toBuild[:-2] + ")"
     command(toBuild)
-    commit()
 
 #d# adds data to table, whole row insertion
 #d# takes string table, and list val
@@ -86,7 +71,6 @@ def addRow(table, val):
             toDo = toDo + "\'" + el + "\'" + ", "
     toDo = toDo[:-2] + ")"
     command(toDo)
-    commit()
 
 #c# testing
 #x# comm("CREATE TABLE wry(testInt INTEGER)")
@@ -124,7 +108,6 @@ def createAccount(username, password, passwdverf):
 		return "account created"
 
 #d# takes in two strings and verifies presence in database
-#d# returns int: 0 (bad user), 1 (bad pass), or 2 (success)
 def loginAccount(username, password):
 	db = sqlite3.connect("mapp_site.db")
 	c = db.cursor()
@@ -132,18 +115,13 @@ def loginAccount(username, password):
 	fetched = c.fetchall()
 	db.close()
 	if len(fetched) < 1:
-        #c# flash message here
-		#c# "username does not exist"
-		return 0
+		return "username does not exist"
 	elif fetched[0][0] != password:
-        #c# flash message here
-		#x# "password is incorrect"
-		return 1
+		return "password is incorrect"
 	else:
         #x# session['username'] = username  #starts a session if user inputs correct existing username and password
         #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
-		#x# render_template('homepage.html')     #redirects to homepage
-		return 2
+		return "Successful login"
 
 @app.route("/logout")
 def loggingOut():
