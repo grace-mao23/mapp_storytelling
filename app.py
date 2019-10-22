@@ -84,7 +84,7 @@ def createAccount(username, password, passwdverf):
         addRow("accounts", (username, password))
         return "account created"
 
-@app.route("/login", methods="POST")
+@app.route("/login", methods=["POST"])
 def loginAccount(username, password):
     command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
     fetched = c.fetchall()
