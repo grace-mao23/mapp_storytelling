@@ -5,7 +5,6 @@
     <title> mapp storytelling </title>
   </head>
   <body>
-    {% extends login.html %}
 
     {% block heading %}
     	<center><h1><br>Create your <i>mapp Storytelling</i> account now!</h1></center>
@@ -13,8 +12,12 @@
     {% endblock %}
 
     {% block errorMessages %}
-
-    {%block inputs%}
+        {% for error in get_flashed_messages() %}
+            <center><h4><font color="red">{{error}}</font></h4></center>
+        {% endfor %}
+	{% endblock %}
+	
+    {% block inputs %}
       <br>
       <center>
       <form action="/create" method="post">
@@ -24,7 +27,7 @@
         <input type="submit" value="Login">
       </form>
       </center>
-    {%endblock%}
+    {% endblock %}
   
   
     {%block redirect %}
