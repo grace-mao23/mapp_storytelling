@@ -1,7 +1,7 @@
 Team mapp: Junhee Lee, Kelvin Ng, Pratham Rawat, David Xiedeng
 SoftDev1 pd1
 P00 -- Da Art of Storytellin'
-2019-10-22
+2019-10-18
 
 prathamR -- 2019-18-10 08:21
 Create file for Dev Log
@@ -30,20 +30,23 @@ Create index.html, rename python file to app.py and make small changes to routin
 prathamR -- 2019-10-21 07:57
 Add update log to folder
 
-JunheeL -- 2019-10-22 07:53
+junheeL -- 2019-10-22 07:53
 renamed design doc; added component map;
 
-team -- 2019-10-22 07:55
-Inner Join: Inner join creates a table by ‘intersecting’ the tables given as parameters. The rows in common are concatenated and used as rows in the new table. This can be used to create tables for each story by USING(title) and selecting the stories where the titles match
+junheeL -- 2019-10-22 07:55
+Inner Join:
+Inner join creates a table by ‘intersecting’ the tables given as parameters. The rows in common are concatenated and used as rows in the new table. This can be used to create tables for each story by USING(title) and selecting the stories where the titles match
 
-team -- 2019-10-22 07:55
-Left Outer Join: Left join creates a table by including all rows of the ‘left’ table and matching it up with corresponding rows in the other table. This results in some rows from the other table being excluded, and some rows in the newly created table having null entries. This can be used to get a list of stories each author has contributed to in order to display all the edits the author has created.
+junheeL -- 2019-10-22 07:55
+Left Outer Join:
+Left join creates a table by including all rows of the ‘left’ table and matching it up with corresponding rows in the other table. This results in some rows from the other table being excluded, and some rows in the newly created table having null entries. This can be used to get a list of stories each author has contributed to in order to display all the edits the author has created.
 
-team -- 2019-10-22 07:56
-Cross Join:Cross join creates a cartesian product of the two tables, treating them as sets. This maps each element in table A to each element in table B. This does not seem to fit into the current plans
+junheeL -- 2019-10-22 07:56
+Cross Join:
+Cross join creates a cartesian product of the two tables, treating them as sets. This maps each element in table A to each element in table B. This does not seem to fit into the current plans
 
-team -- 2019-10-22 07:56
-Post-Reading:
+junheeL -- 2019-10-22 07:56
+Post-Reading Remarks:
 1) will improve communication and documentation so we don't break things accidentally
 2) Acknowledge that code won't be perfect and settle for "working"
 
