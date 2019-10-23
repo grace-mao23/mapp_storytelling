@@ -120,7 +120,6 @@ def createAccount(username, password, passwdverf):
 		addRow("accounts", (username, password))
 		return "account created"
 
-#d# takes in two strings and verifies presence in database
 def loginAccount(username, password):
 	db = sqlite3.connect("mapp_site.db")
 	c = db.cursor()
