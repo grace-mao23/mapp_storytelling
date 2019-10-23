@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> mapp storytelling </title>
+  </head>
+  <body>
+    {% extends login.html %}
+
+    {% block heading %}
+    	<center><h1><br>Welcome to <i>mapp Storytelling</i>!</h1></center>
+    	<br>
+    {% endblock %}
+
+    {% block errorMessages %}
+    {% endblock %}
+
+    {%block inputs%}
+      <br>
+      <center>
+      <form action="/createStory" method="get">
+        <input type="submit" value="Create New Story">
+      </form>
+      <br>
+      <form action="/addToStory" method="get">
+        <input type="submit" value="Add To Story">
+      </form>
+      <br>
+      <form action="/mystories" method="get">
+        <input type="submit" value="My Stories">
+      </form>
+      <br>
+      <form action="/logout" method="get">
+        <input type="submit" value="Logout">
+      </form>
+      </center>
+    {%endblock%}
+
+    {%block redirect %}
+    {%endblock%}
+  </body>
+</html>

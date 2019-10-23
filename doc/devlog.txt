@@ -52,3 +52,6 @@ Post-Reading Remarks:
 
 prathamR -- 2019-10-22 08:40
 Create Jinja Inheritance for login and create account pages,links
+
+prathamR -- 2019-10-23 00:16
+Create homepage site, and update routes and linkages in flask app file

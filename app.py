@@ -84,6 +84,18 @@ def createAccount(username, password, passwdverf):
         addRow("accounts", (username, password))
         return "account created"
 
+@app.route("/createStory")
+def createStory():
+    return ""
+
+@app.route("/addToStory")
+def addToStory():
+    return ""
+
+@app.route("/mystories")
+def mystories():
+    return ""
+
 @app.route("/login", methods=["POST"])
 def loginAccount(username, password):
     command("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
