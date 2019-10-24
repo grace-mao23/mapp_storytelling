@@ -67,3 +67,6 @@ Create homepage site, and update routes and linkages in flask app file
 
 prathamR -- 2019-10-24 08:24
 Fix inheritance issues in Jinja
+
+prathamR -- 2019-10-24 08:30
+I named the submit button the createAccounts.html page as "login", that has been fixed
