@@ -18,8 +18,10 @@ app.secret_key = os.urandom(32)
 @app.route("/")
 def loggingIn():
     if 'username' in session:
+        print("username in session")
         flash("Hello " + session['username'] + "!")
         return render_template('homepage.html') #user is redirected to the response page if logged in
+    print("username not in session, redirecting to login")
     return redirect('/login') #returns to login page if user is not logged in
 
 #d# two post inputs username and password
@@ -112,39 +114,43 @@ buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
 #d# creates account if suitable input is provided
 #d# returns String message
 def createAccount(username, password, passwdverf):
-	db = sqlite3.connect("mapp_site.db")
-	c = db.cursor()
-	c.execute("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
-	fetched = c.fetchall()
-	db.close()
-	if len(username) < 1:
-		return "username too short"
-	elif len(password) < 1:
-		return "password too short"
-	elif len(fetched) > 0:
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT username FROM accounts WHERE username = \'{}\'".format(username))
+    fetched = c.fetchall()
+    db.close()
+    if len(username) < 1:
+        return "username too short"
+    elif "'" in username:
+        return "Please do not include ' in the username"
+    elif len(password) < 1:
+        return "password too short"
+    elif len(fetched) > 0:
         #c# flash message here
-		return "username exists"
-	elif password != passwdverf:
+        return "username exists"
+    elif password != passwdverf:
         #c# flash message here
-		return "password does not match"
-	else:
-		addRow("accounts", (username, password))
-		return "account created"
+        return "password does not match"
+    else:
+        addRow("accounts", (username, password))
+        return "account created"
 
 def loginAccount(username, password):
-	db = sqlite3.connect("mapp_site.db")
-	c = db.cursor()
-	c.execute("SELECT username, password FROM accounts WHERE username = \'{}\'".format(username))
-	fetched = c.fetchall()
-	db.close()
-	if len(fetched) < 1:
-		return "username does not exist"
-	elif fetched[0][0] != password:
-		return "password is incorrect"
-	else:
-            session['username'] = username  #starts a session if user inputs correct existing username and password
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    cmd = "SELECT username, password FROM accounts WHERE username = '{}';".format(username)
+    c.execute(cmd)
+    fetched = c.fetchall()
+    db.close()
+    if len(fetched) < 1:
+        return "username does not exist"
+    elif fetched[0][0] != password:
+        return "password is incorrect"
+    else:
+        session['username'] = username  #starts a session if user inputs correct existing username and password
+        print('created session')
         #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
-            return "Successful login"
+        return "Successful login"
 
 @app.route("/logout")
 def loggingOut():
