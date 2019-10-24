@@ -41,10 +41,10 @@ def login():
 	#c# bad login
 	#x# print (loginCode)
     flash(loginCode)
-    if loginCode != "":
+	#x# render_template('homepage.html') #redirects to homepage if good login
+    if loginCode == "Successful login":
         flash("Hello " + session['username'] + "!")
-        return redirect("/")
-	#x# render_template('homepage.html') #redirects to homepage if good login 
+        return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
 
 @app.route("/create", methods=['GET', 'POST'])
@@ -59,7 +59,7 @@ def signUp():
 
 #b# Site Interaction
 #b# ========================================================================
-#b# Database Interaction 
+#b# Database Interaction
 
 #d# calls c.execute(command)
 def command(command):
@@ -144,7 +144,7 @@ def loginAccount(username, password):
     db.close()
     if len(fetched) < 1:
         return "username does not exist"
-    elif fetched[0][0] != password:
+    elif fetched[0][1] != password:
         return "password is incorrect"
     else:
         session['username'] = username  #starts a session if user inputs correct existing username and password
@@ -167,7 +167,7 @@ def loggingOut():
 #c# testing account login
 #x# print (loginAccount("dododd","D")) #c# bad user
 #x# print (loginAccount("d","D")) #c# bad pass
-#x# 
+#x#
 #x# print (loginAccount("d","d"))
 
 #b# Accounts Table Code
