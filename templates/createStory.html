@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>mapp Storytelling</title>
+  </head>
+  <body>
+    {% block pageHeader %}
+    <center><h1>Start your tale...</h1></center>
+    {% endblock %}
+    <br>
+    <br>
+    <form action="/createStory" method="get">
+    {% block title %}
+    <h3>Name Your Story: <input type="text" name="title" value="title"></h3>
+    {% endblock %}
+    <br>
+    <br>
+    {% block introduction %}
+    <h3>Begin Your Story: <input type="text" name="introduction" value="title"></h3>
+    {% endblock %}
+    <br>
+    <input type="submit" value="Tell Your Legend">
+    </form>
+  </body>
+</html>
