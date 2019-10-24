@@ -29,9 +29,6 @@ def loggingIn():
 #d# goes to homepage with successful login
 @app.route("/login", methods=['GET', "POST"])
 def login():
-    if 'username' in session:
-        flash("Hello " + session['username'] + "!")
-        return redirect('/')
     #x# print (request)
     #x# print (request.form)
     #c# use .form when method is post
@@ -44,6 +41,9 @@ def login():
 	#c# bad login
 	#x# print (loginCode)
     flash(loginCode)
+    if loginCode == "":
+        flash("Hello " + session['username'] + "!")
+        return redirect("/")
 	#x# render_template('homepage.html') #redirects to homepage if good login 
     return render_template('login.html') #returns to login page if user is not logged in
 
