@@ -3,7 +3,7 @@
 # P#00 - Da Art of Storytellin'
 # 2019-10-28
 
-from flask import Flask, render_template, session, flash, request
+from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
 
 app = Flask(__name__)
@@ -20,29 +20,40 @@ def loggingIn():
     if 'username' in session:
         flash("Hello " + session['username'] + "!")
         return render_template('homepage.html') #user is redirected to the response page if logged in
-    return render_template('login.html') #returns to login page if user is not logged in
+    return redirect('/login') #returns to login page if user is not logged in
 
 #d# two post inputs username and password
 #d# returns to itself and flashes errors if bad login
 #d# goes to homepage with successful login
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=['GET', "POST"])
 def login():
+    if 'username' in session:
+        flash("Hello " + session['username'] + "!")
+        return redirect('/')
     #x# print (request)
     #x# print (request.form)
     #c# use .form when method is post
     #x# print (request.method)
-	loginCode = loginAccount(request.form["username"], request.form["password"])
+    loginCode = ""
+    try:
+        loginCode = loginAccount(request.form["username"], request.form["password"])
+    except:
+        print("yeet")
 	#c# bad login
 	#x# print (loginCode)
-	flash(loginCode)
+    flash(loginCode)
 	#x# render_template('homepage.html') #redirects to homepage if good login 
-	return render_template('login.html') #returns to login page if user is not logged in
+    return render_template('login.html') #returns to login page if user is not logged in
 
-@app.route("/create", methods=["POST"])
+@app.route("/create", methods=['GET', 'POST'])
 def signUp():
-	signUpCode = createAccount(request.form["username"], request.form["password"], request.form["password2"])
-	flash(signUpCode)
-	return render_template("createAccount.html")
+    signUpCode = ""
+    try:
+        signUpCode = createAccount(request.form["username"], request.form["password"], request.form["password2"])
+    except:
+        print("yeet")
+    flash(signUpCode)
+    return render_template("createAccount.html")
 
 #b# Site Interaction
 #b# ========================================================================
@@ -131,9 +142,9 @@ def loginAccount(username, password):
 	elif fetched[0][0] != password:
 		return "password is incorrect"
 	else:
-        #x# session['username'] = username  #starts a session if user inputs correct existing username and password
+            session['username'] = username  #starts a session if user inputs correct existing username and password
         #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
-		return "Successful login"
+            return "Successful login"
 
 @app.route("/logout")
 def loggingOut():
