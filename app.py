@@ -41,7 +41,7 @@ def login():
 	#c# bad login
 	#x# print (loginCode)
     flash(loginCode)
-    if loginCode == "":
+    if loginCode != "":
         flash("Hello " + session['username'] + "!")
         return redirect("/")
 	#x# render_template('homepage.html') #redirects to homepage if good login 
