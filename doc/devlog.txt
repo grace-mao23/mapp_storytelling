@@ -64,3 +64,6 @@ Tested account creation; appears to work
 
 prathamR -- 2019-10-23 00:16
 Create homepage site, and update routes and linkages in flask app file
+
+prathamR -- 2019-10-24 08:24
+Fix inheritance issues in Jinja
