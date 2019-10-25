@@ -94,3 +94,6 @@ Create updateStory.html
 
 junheeL -- 2019-10-25 08:36
 improved updatelog, fixed devlog
+
+prathamR -- 2019-10-25 08:32
+Add display of previous story to updateStory.html
