@@ -65,11 +65,32 @@ Tested account creation; appears to work
 prathamR -- 2019-10-23 00:16
 Create homepage site, and update routes and linkages in flask app file
 
+junheeL -- 2019-10-24 08:23
+fixed bugs and indentation
+
 prathamR -- 2019-10-24 08:24
 Fix inheritance issues in Jinja
+
+junheeL -- 2019-10-24 08:27
+fixed redirecting issue
+
+junheeL -- 2019-10-24 08:29
+fixed redirect bug
 
 prathamR -- 2019-10-24 08:30
 I named the submit button the createAccounts.html page as "login", that has been fixed
 
+junheeL -- 2019-10-24 08:32
+fixed error generating code
+
 prathamR -- 2019-10-24 08:42
 Add createAccount.html
+
+junheeL -- 2019-10-24 20:52
+updated README to satisfy task3 requirements
+
+prathamR -- 2019-10-25 08:25
+Create updateStory.html
+
+junheeL -- 2019-10-25 08:36
+improved updatelog, fixed devlog
