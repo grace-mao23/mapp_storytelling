@@ -47,6 +47,12 @@ def login():
         return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
 
+@app.route("/logout")
+def loggingOut():
+    session.pop('username')		#removes session when logging out
+    flash("You have successfully logged out!")
+    return redirect("/")	#redircts to login page
+
 @app.route("/create", methods=['GET', 'POST'])
 def signUp():
     signUpCode = ""
@@ -56,6 +62,12 @@ def signUp():
         print("yeet")
     flash(signUpCode)
     return render_template("createAccount.html")
+
+@app.route("/createStory", methods='GET')
+def newStory():
+    #c# takes in inputs and moves to database
+    #c# so far only text and story
+    #c# moves to story page
 
 #b# Site Interaction
 #b# ========================================================================
@@ -152,12 +164,10 @@ def loginAccount(username, password):
         #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
         return "Successful login"
 
-@app.route("/logout")
-def loggingOut():
-    session.pop('username')		#removes session when logging out
-    flash("You have successfully logged out!")
-    return redirect("/")	#redircts to login page
-
+#d# pushes story inputs to database
+def uploadStory():
+    return
+    
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
 #x# print (createAccount("d", "d", "d")) #c# should say exists
