@@ -1,4 +1,4 @@
-import datetime
+import datetime, subprocess
 
 print("Please enter your name:")
 print("Format: firstnameL")
@@ -16,3 +16,7 @@ devlogFile.write("\n" + name + " -- " + timestamp + "\n")
 devlogFile.write(update+"\n")
 
 devlogFile.close()
+
+subprocess.run(['git', 'pull'])
+subprocess.run(['git', 'commit', '-am', update])
+subprocess.run(['git', 'push'])
