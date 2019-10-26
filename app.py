@@ -182,9 +182,9 @@ def loginAccount(username, password):
 
 #d# pushes story inputs to database
 #d# rejects upload if:
-#d# - title is empty 
+#d# - title is empty
 #d# - story is empty
-#d# - title already exists 
+#d# - title already exists
 def uploadStory(title, story):
 	db = sqlite3.connect("mapp_site.db")
 	c = db.cursor()
@@ -205,7 +205,7 @@ def uploadStory(title, story):
 		timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
 		addRow("stories", (title, session['username'], timestamp, story))
 		return "Story uploaded"
-    
+
 #d# takes two string inputs returns list of details
 #d# returns list of strings
 def readStory(title, story):
