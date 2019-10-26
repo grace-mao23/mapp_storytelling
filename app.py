@@ -66,7 +66,7 @@ def signUp():
 @app.route("/createStory", methods='GET')
 def newStory():
     #c# takes in inputs and moves to database
-    #c# so far only text and story
+    #c# so far only title and story
     #c# moves to story page
 
 #b# Site Interaction
@@ -120,7 +120,7 @@ def addRow(table, val):
 #b# Accounts Table Code
 
 buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
-
+buildTable("stories", {"title": "TEXT", "story": "TEXT"})
 
 #d# takes in three strings and reads from table accounts if data exists
 #d# creates account if suitable input is provided
@@ -165,8 +165,28 @@ def loginAccount(username, password):
         return "Successful login"
 
 #d# pushes story inputs to database
-def uploadStory():
-    return
+#d# rejects upload if:
+#d# - title is empty 
+#d# - story is empty
+#d# - title already exists 
+def uploadStory(title, story):
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT title FROM stories WHERE title = \'{}\'".format(title))
+    fetched = c.fetchall()
+    db.close()
+	#c# title already exists
+	if len(fetched) > 0:
+		return "Title already exists."
+	#c# title is empty
+	elif len(title) < 1:
+		return "Please title your story"
+	#c# story is empty
+	elif len(story) < 1:
+		return "Please write a story"
+	else:
+		addRow("stories", {title, story})
+		return "Story uploaded"
     
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
@@ -179,6 +199,8 @@ def uploadStory():
 #x# print (loginAccount("d","D")) #c# bad pass
 #x#
 #x# print (loginAccount("d","d"))
+
+#c# 
 
 #b# Accounts Table Code
 #b# ========================================================================
