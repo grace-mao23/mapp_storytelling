@@ -97,3 +97,21 @@ improved updatelog, fixed devlog
 
 prathamR -- 2019-10-25 08:32
 Add display of previous story to updateStory.html
+
+DavidX -- 2019-10-22 18:58
+Have /login working for bad logins
+
+DavidX -- 2019-10-22 19:13
+Modified createAccount for string output and added cases of short usernames and passwords
+
+DavidX -- 2019-10-22 19:19
+Tested account creation; appears to work
+
+DavidX -- 2019-10-26 13:01
+added uploadStory( , ); moving to test
+
+DavidX -- 2019-10-26 13:19
+Tested uploadStory( , ) for four cases
+
+DavidX -- 2019-10-26 13:50
+Added functional route to /createStory

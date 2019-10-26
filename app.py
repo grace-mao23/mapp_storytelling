@@ -63,11 +63,26 @@ def signUp():
     flash(signUpCode)
     return render_template("createAccount.html")
 
-@app.route("/createStory", methods='GET')
+@app.route("/createStory", methods=['GET', 'POST'])
 def newStory():
-    #c# takes in inputs and moves to database
+	createStoryCode = ""
+	#c# takes in inputs and moves to database
     #c# so far only title and story
-    #c# moves to story page
+	if request.method == 'POST':
+		Title, Story = request.form['title'], request.form['introduction']
+		createStoryCode = uploadStory(Title, Story)
+		#c# returns here if error occurs
+		if createStoryCode != "Story uploaded":
+			flash(createStoryCode)
+			#c# keeps input text if error pops up
+			return render_template("createStory.html", ttle = Title, Story = Story)
+		#c# moves to story page
+		else:
+			return render_template("homepage.html")
+	#c# first time on page
+	else:
+		#c# may change to return to Story page
+		return render_template("createStory.html", ttle = "", Story = "")
 
 #b# Site Interaction
 #b# ========================================================================
@@ -170,12 +185,13 @@ def loginAccount(username, password):
 #d# - story is empty
 #d# - title already exists 
 def uploadStory(title, story):
-    db = sqlite3.connect("mapp_site.db")
-    c = db.cursor()
-    c.execute("SELECT title FROM stories WHERE title = \'{}\'".format(title))
-    fetched = c.fetchall()
-    db.close()
+	db = sqlite3.connect("mapp_site.db")
+	c = db.cursor()
+	c.execute("SELECT title FROM stories WHERE title = \'{}\'".format(title))
+	fetched = c.fetchall()
+	db.close()
 	#c# title already exists
+	#x# print(fetched)
 	if len(fetched) > 0:
 		return "Title already exists."
 	#c# title is empty
@@ -185,7 +201,7 @@ def uploadStory(title, story):
 	elif len(story) < 1:
 		return "Please write a story"
 	else:
-		addRow("stories", {title, story})
+		addRow("stories", (title, story))
 		return "Story uploaded"
     
 #c# testing account creation
@@ -200,7 +216,11 @@ def uploadStory(title, story):
 #x#
 #x# print (loginAccount("d","d"))
 
-#c# 
+#c# testing uploadStory
+#x# print (uploadStory("", "pan-paka-paan")) #c# should say to title
+#x# print (uploadStory("Atago", "")) #c# should say to write story
+#x# print (uploadStory("Atago", "pan-paka-paan")) #c# should create story
+#x# print (uploadStory("Atago", "Doun")) #c# should say title exists
 
 #b# Accounts Table Code
 #b# ========================================================================
