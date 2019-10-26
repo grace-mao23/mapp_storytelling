@@ -5,6 +5,7 @@
 
 from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
+import datetime
 
 app = Flask(__name__)
 
@@ -135,7 +136,7 @@ def addRow(table, val):
 #b# Accounts Table Code
 
 buildTable("accounts", {"username": "TEXT", "password": "TEXT"})
-buildTable("stories", {"title": "TEXT", "story": "TEXT"})
+buildTable("stories", {"title": "TEXT", "author": "TEXT", "time": "TEXT", "story": "TEXT"})
 
 #d# takes in three strings and reads from table accounts if data exists
 #d# creates account if suitable input is provided
@@ -201,9 +202,20 @@ def uploadStory(title, story):
 	elif len(story) < 1:
 		return "Please write a story"
 	else:
-		addRow("stories", (title, story))
+		timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+		addRow("stories", (title, session['username'], timestamp, story))
 		return "Story uploaded"
     
+#d# takes two string inputs returns list of details
+#d# returns list of strings
+def readStory(title, story):
+	db = sqlite3.connect("mapp_site.db")
+	c = db.cursor()
+	c.execute("SELECT title, story FROM stories WHERE title = \'{}\' AND story = \'{}\'".format(title, story))
+	fetched = c.fetchall()
+	db.close()
+	return fetched
+
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
 #x# print (createAccount("d", "d", "d")) #c# should say exists
@@ -222,12 +234,18 @@ def uploadStory(title, story):
 #x# print (uploadStory("Atago", "pan-paka-paan")) #c# should create story
 #x# print (uploadStory("Atago", "Doun")) #c# should say title exists
 
+#c# testing readStory
+#x# print (readStory("Takao", "Be still as water!"))
+
 #b# Accounts Table Code
 #b# ========================================================================
+
+
 
 db.close()  #close database
 #c# Bottom of DB Code
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+	app.debug = True
+	app.run()
+	redirect("/")

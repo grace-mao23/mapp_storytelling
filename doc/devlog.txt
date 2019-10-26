@@ -115,3 +115,6 @@ Tested uploadStory( , ) for four cases
 
 DavidX -- 2019-10-26 13:50
 Added functional route to /createStory
+
+DavidX -- 2019-10-26 16:53
+Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
