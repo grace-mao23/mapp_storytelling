@@ -9,7 +9,7 @@
     <center><h1>Start your tale...</h1></center>
     {% endblock %}
     <br>
-	{% block errorMessages %}
+	  {% block errorMessages %}
       {% for error in get_flashed_messages() %}
             <center><h4><font color="red">{{error}}</font></h4></center>
       {% endfor %}

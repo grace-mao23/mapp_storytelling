@@ -118,3 +118,6 @@ Added functional route to /createStory
 
 DavidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
+
+kelvinN -- 2019-10-16 19:45
+Added the route "/addToStory"

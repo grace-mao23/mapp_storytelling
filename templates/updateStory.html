@@ -5,22 +5,17 @@
     <title>mapp Storytelling</title>
   </head>
   <body>
-    {% extends createStory.html%}
-
     {% block pageHeader %}
     <center><h1>Continue the Legend...</h1></center>
     {% endblock %}
-    <br>
-    <br>
+
     <center>{{ lastUpdate }}</center>
-    <br>
-    <br>
-    <form action="/createStory" method="get">
+    <form action="/addToStory" method="get">
     {% block title %}
-    <h3>Title: <i>{{ title }}</i></h3>
+    <h3>Title: <i>{{ ttle }}</i></h3>
     {% endblock %}
-    <br>
-    <br>
+    <h3>Current Story:<h3>
+    {{ Story }}<br><br>
     {% block introduction %}
     <h3>Add Your Update: <input type="text" name="introduction" value="title"></h3>
     {% endblock %}

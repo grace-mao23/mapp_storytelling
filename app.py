@@ -85,6 +85,16 @@ def newStory():
 		#c# may change to return to Story page
 		return render_template("createStory.html", ttle = "", Story = "")
 
+@app.route("/addToStory", methods=['GET', 'POST'])
+def editStory():
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT * FROM stories WHERE title = 'hi'")
+    fetched = c.fetchall()
+    print(fetched)
+    return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
+
+
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction
