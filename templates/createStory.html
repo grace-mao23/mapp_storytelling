@@ -8,6 +8,13 @@
     {% block pageHeader %}
     <center><h1>Start your tale...</h1></center>
     {% endblock %}
+    <br>
+	{% block errorMessages %}
+      {% for error in get_flashed_messages() %}
+            <center><h4><font color="red">{{error}}</font></h4></center>
+      {% endfor %}
+    {% endblock %}
+    <br>
     <form action="/createStory" method="Post">
     {% block title %}
     <h3>Name Your Story: <input type="text" name="title" value={{ttle}}></h3>
