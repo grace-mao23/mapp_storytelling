@@ -1,5 +1,5 @@
-#Team mapp - Pratham Rawat, Junhee Lee, Kelvin Ng & David Xiedeng
-#SoftDev1 pd1
+# Team mapp - Pratham Rawat, Junhee Lee, Kelvin Ng & David Xiedeng
+# SoftDev1 pd1
 # P#00 - Da Art of Storytellin'
 # 2019-10-28
 
@@ -85,13 +85,23 @@ def newStory():
 		#c# may change to return to Story page
 		return render_template("createStory.html", ttle = "", Story = "")
 
-@app.route("/addToStory", methods=['GET', 'POST'])
+@app.route("/viewStory")
+def viewStories():
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT * FROM stories")
+    fetch = c.fetchall()
+    print(fetch)
+    return render_template("allStories.html", stories = fetch)
+
+@app.route("/editStory", methods=['GET', 'POST'])
 def editStory():
     db = sqlite3.connect("mapp_site.db")
     c = db.cursor()
     c.execute("SELECT * FROM stories WHERE title = 'hi'")
     fetched = c.fetchall()
     print(fetched)
+
     # need code here to add the edits of the story to the db
     return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
 

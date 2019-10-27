@@ -21,8 +21,14 @@ Added method createAccount(, , ,)
 DavidX -- 2019-10-19 18:21
 added method loginAccount( , )
 
-KelvinN -- 2019-10-19 18:58
-Added routes, sessions, and removes sessions when logging out.
+kelvinN -- 2019-10-19 18:58
+Added routes
+
+kelvinN -- 2019-10-19 19:06
+added sessions and removes sessions when logging out of wesbite
+
+kelvinN -- 2019-10-19 19:18
+edited heading
 
 prathamR -- 2019-10-19 19:33
 Create index.html, rename python file to app.py and make small changes to routing
@@ -119,5 +125,14 @@ Added functional route to /createStory
 DavidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
 
-kelvinN -- 2019-10-16 19:45
-Added the route "/addToStory"
+kelvinN -- 2019-10-26 19:21
+edited updateStory.html and added errorMessages block and
+
+kelvinN -- 2019-10-26 19:45
+Added the route /addToStory
+
+kelvinN -- 2019-10-27 14:01
+fixed endblock in allStories.html
+
+kelvinN -- 2019-10-27 14:22
+created route /viewStory
