@@ -7,17 +7,23 @@
   <body>
     {% block pageHeader %}
     <center><h1>Continue the Legend...</h1></center>
-    {% endblock %}
+    {% endblock %}<br>
+
+    {% block errorMessages %}
+      {% for error in get_flashed_messages() %}
+            <center><h4><font color="red">{{error}}</font></h4></center>
+      {% endfor %}
+    {% endblock %}<br>
 
     <center>{{ lastUpdate }}</center>
-    <form action="/addToStory" method="get">
+    <form action="/addToStory" method="post">
     {% block title %}
     <h3>Title: <i>{{ ttle }}</i></h3>
     {% endblock %}
     <h3>Current Story:<h3>
     {{ Story }}<br><br>
     {% block introduction %}
-    <h3>Add Your Update: <input type="text" name="introduction" value="title"></h3>
+    <h3>Add Your Update: <input type="text" name="introduction" value="Story"></h3>
     {% endblock %}
     <br>
     <input type="submit" value="Tell Your Legend">

@@ -92,6 +92,7 @@ def editStory():
     c.execute("SELECT * FROM stories WHERE title = 'hi'")
     fetched = c.fetchall()
     print(fetched)
+    # need code here to add the edits of the story to the db
     return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
 
 
