@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>mapp Storytelling!</title>
+  </head>
+  <body>
+    {% block title %}
+    <center><h1>A List of Legends</h1></center>
+    {endblock}
+
+    {% block searchBar %}
+    <center>
+    <form action="/search" method="get">
+    Search Stories: <input type="text" name="search"> <input type="submit" value="Search">
+    </form>
+    </center>
+    {endblock}
+
+    {% block stories %}
+    <center>
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Continue the Story</th>
+      </thead>
+      {% for story in {{stories}} %}
+        <tr>
+          <td>{{story[0]}}</td>
+          <td>{{story[1]}}</td>
+          <td><a href="/editStory">{{storyLink}}</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+    </center>
+    {endblock}
+  </body>
+</html>
