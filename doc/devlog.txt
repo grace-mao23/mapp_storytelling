@@ -126,7 +126,7 @@ DavidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
 
 kelvinN -- 2019-10-26 19:21
-edited updateStory.html and added errorMessages block and
+edited updateStory.html and added errorMessages block
 
 kelvinN -- 2019-10-26 19:45
 Added the route /addToStory
