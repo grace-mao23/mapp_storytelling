@@ -22,13 +22,16 @@ DavidX -- 2019-10-19 18:21
 added method loginAccount( , )
 
 kelvinN -- 2019-10-19 18:58
-Added routes
+Added routes login and logout routes
 
 kelvinN -- 2019-10-19 19:06
 added sessions and removes sessions when logging out of wesbite
 
 kelvinN -- 2019-10-19 19:18
 edited heading
+
+kelvinN -- 2019-10-19 19:23
+created appropriate html files
 
 prathamR -- 2019-10-19 19:33
 Create index.html, rename python file to app.py and make small changes to routing
@@ -126,7 +129,10 @@ DavidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
 
 kelvinN -- 2019-10-26 19:21
-edited updateStory.html and added errorMessages block
+fixed updateStory.html bugs and changed variable names
+
+kelvinN -- 2019-10-26 19:22
+added errorMessages block
 
 kelvinN -- 2019-10-26 19:45
 Added the route /addToStory
@@ -135,13 +141,19 @@ kelvinN -- 2019-10-27 14:01
 fixed endblock in allStories.html
 
 kelvinN -- 2019-10-27 14:22
-created route /viewStory
+created route /viewStory 
+
+kelvinN -- 2019-10-27 14:22
+edited /viewStory to display correct title and story 
 
 prathamR -- 2019-10-27 20:32
 Fix minor jinja formatting error
 
 prathamR -- 2019-10-27 20:33
 Fix updatelog script
+
+kelvinN -- 2019-10-27 21:22
+/viewStory now links to new page for the user to edit story
 
 DavidX -- 2019-10-27 22:30
 changed editStory() and allStories.html to incorporate button to edit(add to) story"
@@ -177,14 +189,13 @@ prathamR -- 2019-10-27 23:18
 Implement David's Edit story button
 
 prathamR -- 2019-10-27 23:18
-fix merge erros
+fix merge errors
 
 DavidX -- 2019-10-27 23:23
 added method updateStory
 
 junheeL -- 2019-10-27 23:29
 fixed broken route
-
 
 junheeL -- 2019-10-27 23:35
 fixed myStories.html
@@ -210,6 +221,9 @@ reinstated mystories, discovered bug where elements are out of order with added 
 prathamR -- 2019-10-28 00:41
 recreate mystories in HTML because Junhee is s legend
 
+kelvinN -- 2019-10-28 00:43
+attempted search function in /viewStories but stopped due to possible error in network/error in pulling repo properly from github (results not matching the rest of the team's)
+
 junheeL -- 2019-10-28 00:46
 fixed a bug where username, timestamp, and content were in random order each submission. Changed a set to a list
 
@@ -218,6 +232,9 @@ removed all story updates including bugged updates
 
 junheeL -- 2019-10-28 01:02
 stuck a bunch of login checkers everywhere so we don't crash when someone without username attempts to access parts of site inaccessible without loggin in
+
+kelvinN -- 2019-10-28 01:03
+fixed minor issues in devlog
 
 junheeL -- 2019-10-28 01:12
 fixed story updating
