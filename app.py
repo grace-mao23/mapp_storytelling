@@ -97,7 +97,6 @@ def viewStories():
 
 @app.route("/editStory", methods=['GET', 'POST'])
 def editStory():
-<<<<<<< HEAD
 	if request.method == "GET":
 		arg1 = list(dict(request.args).keys())[0]
 		arg2 = request.args[arg1]
@@ -113,6 +112,7 @@ def editStory():
 		# need code here to add the edits of the story to the db
 		return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
+'''
 @app.route("/testing")
 def testing():
 	arg1 = list(dict(request.args).keys())[0]
@@ -128,6 +128,7 @@ def testing():
 
     # need code here to add the edits of the story to the db
     return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
+'''
 
 @app.route("/mystories")
 def myStories():
@@ -230,6 +231,7 @@ def loginAccount(username, password):
     cmd = "SELECT username, password FROM accounts WHERE username = '{}';".format(username)
     c.execute(cmd)
     fetched = c.fetchall()
+    print(fetched)
     db.close()
     if len(fetched) < 1:
         return "username does not exist"
@@ -279,7 +281,22 @@ def readStory(title, story):
 
 #d# takes 4 strings, returns string error message
 #d# changes tables to add newAuthor, and updatedStory
-def updateStory(title, author, newAuthor, updatedStory):
+def updateStory(title, author, newAuthor, updateToStory):
+	db = sqlite3.connect("mapp_site.db")
+	c = db.cursor()
+	#c# retrieve author and story
+	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(title, author))
+	fetched = c.fetchall()
+	#c# update authors, and story text
+	authors = author
+	if "and" in fetched[1]:
+		andIndex = author.index(" and")
+		authors = author[:andIndex] + author[andIndex + 4:]
+	authors = authors + ", and" + newAuthor
+	newStory = fetched[3] + "\n" + updateToStory
+	c.execute("UPDATE stories SET author = \'{}\', story = \'{}\' WHERE title = \'{}\', and author = \'{}\'".format(authors, newStory, title, author))
+	db.commit()
+	db.close()
 	return
 
 #c# testing account creation
@@ -312,11 +329,5 @@ db.close()  #close database
 #c# Bottom of DB Code
 
 if __name__ == "__main__":
-<<<<<<< HEAD
 	app.debug = True
 	app.run()
-=======
-    app.debug = True
-    app.run()
-    redirect("/")
->>>>>>> 4df606814323cdfe59bbe579324aa5c907a2f34b
