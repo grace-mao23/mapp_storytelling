@@ -286,3 +286,6 @@ reformatted html files
 
 junheeL -- 2019-10-28 18:03
 removed accidental updates: venv folder and host/port for app
+
+junheeL -- 2019-10-28 19:31
+removed illegal characters from title, purged story list

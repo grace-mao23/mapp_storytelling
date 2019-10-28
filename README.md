@@ -2,7 +2,8 @@
 
 Person | Role
 ------ | ----
-Junhee Lee | Project ManagerPratham Rawat | Frontend + Integration to Backend
+Junhee Lee | Project Manager
+Pratham Rawat | Frontend + Integration to Backend
 David Xiedeng | Backend (Form Management, SQLite)
 Kelvin Ng | Backend (Routing, Querying, Cookies)
 

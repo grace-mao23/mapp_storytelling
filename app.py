@@ -67,6 +67,8 @@ def newStory():
     #c# takes in inputs and moves to database
     if request.method == 'POST':
         Title, Story = request.form['title'].replace("\'", ""), request.form['introduction']
+        for char in "!*'();:@&=+$,/?%#[]":
+            Title.replace(char, "")
         createStoryCode = uploadStory(Title.replace("\'", ""), Story.replace("\'", ""))
         flash(createStoryCode)
         #c# returns here if error occurs
