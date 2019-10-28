@@ -76,7 +76,7 @@ def newStory():
         #c# moves to story page
         else:
             buildTable(Title, {"update": "TEXT", "user" : "TEXT UNIQUE", "time": "TIMESTAMP"})
-            addRow(Title, (Story, session['username'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M')))
+            addRow(Title, (Story.replace("\'", ""), session['username'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M')))
             return render_template("homepage.html")
     #c# first time on page
     else:
