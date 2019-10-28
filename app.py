@@ -71,9 +71,9 @@ def newStory():
     if request.method == 'POST':
         Title, Story = request.form['title'], request.form['introduction']
         createStoryCode = uploadStory(Title, Story)
+        flash(createStoryCode)
         #c# returns here if error occurs
         if createStoryCode != "Story uploaded":
-            flash(createStoryCode)
             #c# keeps input text if error pops up
             return render_template("createStory.html", ttle = Title, Story = Story)
         #c# moves to story page
