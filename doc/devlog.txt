@@ -185,3 +185,6 @@ added method updateStory
 junheeL -- 2019-10-27 23:29
 fixed broken route
 
+
+junheeL -- 2019-10-27 23:35
+fixed myStories.html

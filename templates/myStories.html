@@ -5,15 +5,13 @@
     <title>mapp Storytelling!</title>
   </head>
   <body>
-    {% extends myStories.html %}
+    {% extends 'allStories.html' %}
 
     {% block title %}
     <center><h1>Your Stories</h1></center>
     {% endblock %}
 
-    {% block searchBar %}
-
-    {% block stories %}
+    {% block storiesblock %}
     <center>
     <table>
       <thead>
@@ -21,7 +19,7 @@
         <th>Description</th>
         <th>Read the Story</th>
       </thead>
-      {% for story in {{stories}} %}
+      {% for story in stories %}
         <tr>
           <td>{{story[0]}}</td>
           <td>{{story[1]}}</td>
@@ -30,6 +28,6 @@
       {% endfor %}
     </table>
     </center>
-    {endblock}
+    {% endblock %}
   </body>
 </html>
