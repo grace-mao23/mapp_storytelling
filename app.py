@@ -106,19 +106,19 @@ def editStory():
     if 'username' not in session:
         return redirect('/login')
     if request.method == "GET":
-	arg1 = list(dict(request.args).keys())[0]
+        arg1 = list(dict(request.args).keys())[0]
         arg2 = request.args[arg1]
-    	#c# (title, author)
-	info = [arg1, arg2]
-    	#x# print (info)
+        #c# (title, author)
+        info = [arg1, arg2]
+        #x# print (info)
         db = sqlite3.connect("mapp_site.db")
-    	c = db.cursor()
-    	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
-	fetched = c.fetchall()
-    	db.close()
-    	#x# print(fetched)
-    	# need code here to add the edits of the story to the db
-    	return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
+        c = db.cursor()
+        c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
+        fetched = c.fetchall()
+        db.close()
+        #x# print(fetched)
+        # need code here to add the edits of the story to the db
+        return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
 @app.route("/mystories")
 def myStories():
@@ -140,6 +140,7 @@ def addToStory():
         return redirect('/login')
     title = request.args['title']
     addRow(title , [request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
+    command("UPDATE stories SET story='{}';".format(request.form['introduction']))
     return redirect("/readStory?title={}".format(title));
 
 @app.route("/readStory")

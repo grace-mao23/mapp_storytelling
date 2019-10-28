@@ -218,3 +218,6 @@ removed all story updates including bugged updates
 
 junheeL -- 2019-10-28 01:02
 stuck a bunch of login checkers everywhere so we don't crash when someone without username attempts to access parts of site inaccessible without loggin in
+
+junheeL -- 2019-10-28 01:12
+fixed story updating
