@@ -203,3 +203,6 @@ Remove mystories due to too complex implementation
 
 junheeL -- 2019-10-28 00:28
 fixed mystories
+
+junheeL -- 2019-10-28 00:38
+reinstated mystories, discovered bug where elements are out of order with added updates
