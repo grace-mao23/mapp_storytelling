@@ -39,19 +39,19 @@ def login():
         loginCode = loginAccount(request.form["username"], request.form["password"])
     except:
         print("yeet")
-	#c# bad login
-	#x# print (loginCode)
+    #c# bad login
+    #x# print (loginCode)
     flash(loginCode)
-	#x# render_template('homepage.html') #redirects to homepage if good login
+    #x# render_template('homepage.html') #redirects to homepage if good login
     if loginCode == "Successful login":
         return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
 
 @app.route("/logout")
 def loggingOut():
-    session.pop('username')		#removes session when logging out
+    session.pop('username')        #removes session when logging out
     flash("You have successfully logged out!")
-    return redirect("/")	#redircts to login page
+    return redirect("/")    #redircts to login page
 
 @app.route("/create", methods=['GET', 'POST'])
 def signUp():
@@ -65,24 +65,26 @@ def signUp():
 
 @app.route("/createStory", methods=['GET', 'POST'])
 def newStory():
-	createStoryCode = ""
-	#c# takes in inputs and moves to database
+    createStoryCode = ""
+    #c# takes in inputs and moves to database
     #c# so far only title and story
-	if request.method == 'POST':
-		Title, Story = request.form['title'], request.form['introduction']
-		createStoryCode = uploadStory(Title, Story)
-		#c# returns here if error occurs
-		if createStoryCode != "Story uploaded":
-			flash(createStoryCode)
-			#c# keeps input text if error pops up
-			return render_template("createStory.html", ttle = Title, Story = Story)
-		#c# moves to story page
-		else:
-			return render_template("homepage.html")
-	#c# first time on page
-	else:
-		#c# may change to return to Story page
-		return render_template("createStory.html", ttle = "", Story = "")
+    if request.method == 'POST':
+        Title, Story = request.form['title'], request.form['introduction']
+        createStoryCode = uploadStory(Title, Story)
+        #c# returns here if error occurs
+        if createStoryCode != "Story uploaded":
+            flash(createStoryCode)
+            #c# keeps input text if error pops up
+            return render_template("createStory.html", ttle = Title, Story = Story)
+        #c# moves to story page
+        else:
+            buildTable(Title, {"update": "TEXT", "user" : "TEXT UNIQUE", "time": "TIMESTAMP"})
+            addRow(Title, (Story, session['username'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M')))
+            return render_template("homepage.html")
+    #c# first time on page
+    else:
+        #c# may change to return to Story page
+        return render_template("createStory.html", ttle = "", Story = "")
 
 @app.route("/viewStory")
 def viewStories():
@@ -100,7 +102,6 @@ def editStory():
 	#c# (title, author)
 	info = [arg1, arg2]
 	print (info)
-	
 	db = sqlite3.connect("mapp_site.db")
 	c = db.cursor()
 	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
@@ -116,25 +117,51 @@ def testing():
 	arg2 = request.args[arg1]
 	info = list(request.args)
 	return render_template("testing.html", arg1 = arg1, arg2 = arg2)
-	
+
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT * FROM stories WHERE title = 'hi'")
+    fetched = c.fetchall()
+    print(fetched)
+
+    # need code here to add the edits of the story to the db
+    return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
+
+@app.route("/mystories")
+def myStories():
+    return render_template("mystories.html");
+
+
+@app.route("/readStory")
+def readStory():
+    try:
+        storyTitle = request.args['title']
+    except:
+        flash("Story does not exist!")
+        return render_template("homepage.html")
+    story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
+    return render_template("readStory.html", title = storyTitle, stories = story)
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction
 
 #d# calls c.execute(command)
 def command(command):
-	db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
-	c = db.cursor()
-	c.execute(command)
-	db.commit()
-	db.close()
+    db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
+    c = db.cursor()
+    print(command)
+    c.execute(command)
+    output = c.fetchall()
+    db.commit()
+    db.close()
+    return output
 
 #d# create table and remove table if exists
 #d# takes in a filename and the key(dict)
 def buildTable(name, kc):
     toBuild = "CREATE TABLE if not exists " + name + "("
     for el in kc:
-        toBuild = toBuild + "{} {}, ".format(el, kc[el])
+        toBuild = toBuild + "\"{}\" {}, ".format(el, kc[el])
     toBuild = toBuild[:-2] + ")"
     command(toBuild)
 
@@ -218,35 +245,35 @@ def loginAccount(username, password):
 #d# - story is empty
 #d# - title already exists
 def uploadStory(title, story):
-	db = sqlite3.connect("mapp_site.db")
-	c = db.cursor()
-	c.execute("SELECT title FROM stories WHERE title = \'{}\'".format(title))
-	fetched = c.fetchall()
-	db.close()
-	#c# title already exists
-	#x# print(fetched)
-	if len(fetched) > 0:
-		return "Title already exists."
-	#c# title is empty
-	elif len(title) < 1:
-		return "Please title your story"
-	#c# story is empty
-	elif len(story) < 1:
-		return "Please write a story"
-	else:
-		timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-		addRow("stories", (title, session['username'], timestamp, story))
-		return "Story uploaded"
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT title FROM stories WHERE title = \'{}\'".format(title))
+    fetched = c.fetchall()
+    db.close()
+    #c# title already exists
+    #x# print(fetched)
+    if len(fetched) > 0:
+        return "Title already exists."
+    #c# title is empty
+    elif len(title) < 1:
+        return "Please title your story"
+    #c# story is empty
+    elif len(story) < 1:
+        return "Please write a story"
+    else:
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        addRow("stories", (title, session['username'], timestamp, story))
+        return "Story uploaded"
 
 #d# takes two string inputs returns list of details
 #d# returns list of strings
 def readStory(title, story):
-	db = sqlite3.connect("mapp_site.db")
-	c = db.cursor()
-	c.execute("SELECT title, story FROM stories WHERE title = \'{}\' AND story = \'{}\'".format(title, story))
-	fetched = c.fetchall()
-	db.close()
-	return fetched
+    db = sqlite3.connect("mapp_site.db")
+    c = db.cursor()
+    c.execute("SELECT title, story FROM stories WHERE title = \'{}\' AND story = \'{}\'".format(title, story))
+    fetched = c.fetchall()
+    db.close()
+    return fetched
 
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
@@ -278,6 +305,6 @@ db.close()  #close database
 #c# Bottom of DB Code
 
 if __name__ == "__main__":
-	app.debug = True
-	app.run()
-	redirect("/")
+    app.debug = True
+    app.run()
+    redirect("/")

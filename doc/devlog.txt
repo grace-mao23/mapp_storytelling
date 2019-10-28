@@ -151,3 +151,6 @@ fixed duplicate welcome message bug
 
 junheeL -- 2019-10-27 22:46
 fixed formatting of the editStory page
+
+prathamR -- 2019-10-27 22:50
+Create table for every new story
