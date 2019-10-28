@@ -44,7 +44,6 @@ def login():
     flash(loginCode)
 	#x# render_template('homepage.html') #redirects to homepage if good login
     if loginCode == "Successful login":
-        flash("Hello " + session['username'] + "!")
         return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
 
