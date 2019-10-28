@@ -139,7 +139,7 @@ def readStory():
     except:
         flash("Story does not exist!")
         return render_template("homepage.html")
-    story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
+    story = command("SELECT \"update\", \"user\", \"time\" FROM '{}' ORDER BY \"time\";".format(storyTitle))
     return render_template("readStory.html", title = storyTitle, stories = story)
 #b# Site Interaction
 #b# ========================================================================

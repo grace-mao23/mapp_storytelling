@@ -166,3 +166,6 @@ fixed bug where confirmation message of uploading story would not show up
 
 prathamR -- 2019-10-27 22:59
 Fix merge conflicts
+
+junheeL -- 2019-10-27 23:06
+fixed bug caused by spaces in titles
