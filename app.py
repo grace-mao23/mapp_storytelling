@@ -30,19 +30,13 @@ def loggingIn():
 #d# goes to homepage with successful login
 @app.route("/login", methods=['GET', "POST"])
 def login():
-    #x# print (request)
-    #x# print (request.form)
-    #c# use .form when method is post
-    #x# print (request.method)
     loginCode = ""
     try:
         loginCode = loginAccount(request.form["username"], request.form["password"])
     except:
         print("yeet")
     #c# bad login
-    #x# print (loginCode)
     flash(loginCode)
-    #x# render_template('homepage.html') #redirects to homepage if good login
     if loginCode == "Successful login":
         return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
@@ -71,7 +65,6 @@ def newStory():
         return redirect('/login')
     createStoryCode = ""
     #c# takes in inputs and moves to database
-    #c# so far only title and story
     if request.method == 'POST':
         Title, Story = request.form['title'], request.form['introduction']
         createStoryCode = uploadStory(Title, Story)
@@ -87,7 +80,6 @@ def newStory():
             return render_template("homepage.html")
     #c# first time on page
     else:
-        #c# may change to return to Story page
         return render_template("createStory.html", ttle = "", Story = "")
 
 @app.route("/viewStory")
@@ -110,14 +102,11 @@ def editStory():
         arg2 = request.args[arg1]
         #c# (title, author)
         info = [arg1, arg2]
-        #x# print (info)
         db = sqlite3.connect("mapp_site.db")
         c = db.cursor()
         c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
         fetched = c.fetchall()
         db.close()
-        #x# print(fetched)
-        # need code here to add the edits of the story to the db
         return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
 @app.route("/mystories")
@@ -159,6 +148,7 @@ def readStory():
     else:
         story = command("SELECT \"update\", \"user\", \"time\" FROM \"{}\" ORDER BY \"time\";".format(storyTitle))
         return render_template("readStory.html", title = storyTitle, stories = story)
+
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction
@@ -195,19 +185,6 @@ def addRow(table, val):
     toDo = toDo[:-2] + ")"
     command(toDo)
 
-#c# testing
-#x# comm("CREATE TABLE wry(testInt INTEGER)")
-#x# commit()
-
-#c# testing buildTable
-#x# testCols = {"t1": "TEXT", "t2": "INTEGER", "t3":"INTEGER"}
-#x# print (buildTable("HeWo", testCols))
-#x# buildTable("HeWo", testCols)
-
-#c# testing addRow
-#x# testRow = ("UwU", 10, 24)
-#x# addRow("HeWo", testRow)
-
 #b# Database Interaction
 #b# ========================================================================
 #b# Accounts Table Code
@@ -231,10 +208,8 @@ def createAccount(username, password, passwdverf):
     elif len(password) < 1:
         return "password too short"
     elif len(fetched) > 0:
-        #c# flash message here
         return "username exists"
     elif password != passwdverf:
-        #c# flash message here
         return "password does not match"
     else:
         addRow("accounts", (username, password))
@@ -255,7 +230,6 @@ def loginAccount(username, password):
     else:
         session['username'] = username  #starts a session if user inputs correct existing username and password
         print('created session')
-        #x# flash("Hello " + session['username'] + "! You have successfully logged in.")
         return "Successful login"
 
 #d# pushes story inputs to database
@@ -270,7 +244,6 @@ def uploadStory(title, story):
     fetched = c.fetchall()
     db.close()
     #c# title already exists
-    #x# print(fetched)
     if len(fetched) > 0:
         return "Title already exists."
     #c# title is empty
@@ -314,31 +287,8 @@ def updateStory(title, author, newAuthor, updateToStory):
 	db.close()
 	return
 
-#c# testing account creation
-#x# print (createAccount("d", "d", "d"))
-#x# print (createAccount("d", "d", "d")) #c# should say exists
-#x# print (createAccount("doof", "d", "ddd")) #c# passes don't match
-#x# print (createAccount("doof", "d", "d")) #c#
-
-#c# testing account login
-#x# print (loginAccount("dododd","D")) #c# bad user
-#x# print (loginAccount("d","D")) #c# bad pass
-#x#
-#x# print (loginAccount("d","d"))
-
-#c# testing uploadStory
-#x# print (uploadStory("", "pan-paka-paan")) #c# should say to title
-#x# print (uploadStory("Atago", "")) #c# should say to write story
-#x# print (uploadStory("Atago", "pan-paka-paan")) #c# should create story
-#x# print (uploadStory("Atago", "Doun")) #c# should say title exists
-
-#c# testing readStory
-#x# print (readStory("Takao", "Be still as water!"))
-
 #b# Accounts Table Code
 #b# ========================================================================
-
-
 
 db.close()  #close database
 #c# Bottom of DB Code
