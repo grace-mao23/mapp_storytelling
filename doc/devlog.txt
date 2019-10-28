@@ -148,3 +148,6 @@ changed editStory() and allStories.html to incorporate button to edit(add to) st
 
 junheeL -- 2019-10-27 22:43
 fixed duplicate welcome message bug
+
+junheeL -- 2019-10-27 22:46
+fixed formatting of the editStory page

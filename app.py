@@ -108,7 +108,7 @@ def editStory():
 	db.close()
 	print(fetched)
 	# need code here to add the edits of the story to the db
-	return render_template("updateStory.html", ttle = info[0], Story = fetched)
+	return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
 @app.route("/testing")
 def testing():
