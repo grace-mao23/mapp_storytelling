@@ -114,7 +114,7 @@ def editStory():
 
 @app.route("/mystories")
 def myStories():
-    return render_template("myStories.html");
+    return render_template("myStories.html", stories=[])
 
 
 @app.route("/readStory")

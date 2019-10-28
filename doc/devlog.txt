@@ -188,3 +188,6 @@ fixed broken route
 
 junheeL -- 2019-10-27 23:35
 fixed myStories.html
+
+junheeL -- 2019-10-27 23:37
+removed semicolon, added a stories field for rendering myStories
