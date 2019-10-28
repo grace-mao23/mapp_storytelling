@@ -283,3 +283,6 @@ Why are there so many apostrophes to remove
 
 junheeL -- 2019-10-28 19:48
 reformatted html files
+
+junheeL -- 2019-10-28 18:03
+removed accidental updates: venv folder and host/port for app
