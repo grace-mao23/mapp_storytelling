@@ -167,5 +167,16 @@ fixed bug where confirmation message of uploading story would not show up
 prathamR -- 2019-10-27 22:59
 Fix merge conflicts
 
+<<<<<<< HEAD
 prathamR -- 2019-10-27 23:18
 Implement David's Edit story button
+=======
+junheeL -- 2019-10-27 23:06
+fixed bug caused by spaces in titles
+
+junheeL -- 2019-10-27 23:10
+fixed roles on README
+>>>>>>> cbc7ecce3c1fb022afaa70b1e06a805a222aca09
+
+prathamR -- 2019-10-27 23:18
+fix merge erros
