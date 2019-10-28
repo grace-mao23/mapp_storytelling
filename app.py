@@ -71,9 +71,9 @@ def newStory():
     if request.method == 'POST':
         Title, Story = request.form['title'], request.form['introduction']
         createStoryCode = uploadStory(Title, Story)
+        flash(createStoryCode)
         #c# returns here if error occurs
         if createStoryCode != "Story uploaded":
-            flash(createStoryCode)
             #c# keeps input text if error pops up
             return render_template("createStory.html", ttle = Title, Story = Story)
         #c# moves to story page
@@ -112,24 +112,6 @@ def editStory():
 		# need code here to add the edits of the story to the db
 		return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
-'''
-@app.route("/testing")
-def testing():
-	arg1 = list(dict(request.args).keys())[0]
-	arg2 = request.args[arg1]
-	info = list(request.args)
-	return render_template("testing.html", arg1 = arg1, arg2 = arg2)
-
-    db = sqlite3.connect("mapp_site.db")
-    c = db.cursor()
-    c.execute("SELECT * FROM stories WHERE title = 'hi'")
-    fetched = c.fetchall()
-    print(fetched)
-
-    # need code here to add the edits of the story to the db
-    return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
-'''
-
 @app.route("/mystories")
 def myStories():
     return render_template("mystories.html");
@@ -142,8 +124,13 @@ def readStory():
     except:
         flash("Story does not exist!")
         return render_template("homepage.html")
-    story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
-    return render_template("readStory.html", title = storyTitle, stories = story)
+    print(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])))
+    if(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])) == []):
+        author = command("""SELECT author FROM stories WHERE title = \"{}\";""".format(storyTitle))[0][0]
+        return redirect("/editStory?{}={}".format(storyTitle, author))
+    else:
+        story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
+        return render_template("readStory.html", title = storyTitle, stories = story)
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction
@@ -162,7 +149,7 @@ def command(command):
 #d# create table and remove table if exists
 #d# takes in a filename and the key(dict)
 def buildTable(name, kc):
-    toBuild = "CREATE TABLE if not exists " + name + "("
+    toBuild = "CREATE TABLE if not exists \"" + name + "\"("
     for el in kc:
         toBuild = toBuild + "\"{}\" {}, ".format(el, kc[el])
     toBuild = toBuild[:-2] + ")"
@@ -171,7 +158,7 @@ def buildTable(name, kc):
 #d# adds data to table, whole row insertion
 #d# takes string table, and list val
 def addRow(table, val):
-    toDo = "INSERT INTO {} VALUES (".format(table)
+    toDo = "INSERT INTO \"{}\" VALUES (".format(table)
     for el in val:
         if type(el) == int:
             toDo = toDo + str(el) + ", "

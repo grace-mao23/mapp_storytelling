@@ -29,15 +29,7 @@
         <tr>
           <td>{{story[0]}}</td>
           <td>{{story[1]}}</td>
-<<<<<<< Updated upstream
-          <td>
-			<form action= "/editStory">
-				<button type="submit" name={{story[0]}} value={{story[1]}}>Edit</button>
-			</form>
-		  </td>
-=======
           <td><a href="/readStory?title={{story[0]}}">Read/Edit Here!</a></td>
->>>>>>> Stashed changes
         </tr>
       {% endfor %}
     </table>
