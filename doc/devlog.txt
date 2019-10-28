@@ -142,3 +142,6 @@ Fix minor jinja formatting error
 
 prathamR -- 2019-10-27 20:33
 Fix updatelog script
+
+DavidX -- 2019-10-27 22:30
+changed editStory() and allStories.html to incorporate button to edit(add to) story"

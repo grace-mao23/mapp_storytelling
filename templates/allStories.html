@@ -29,7 +29,11 @@
         <tr>
           <td>{{story[0]}}</td>
           <td>{{story[1]}}</td>
-          <td><a href="/editStory">{{storyLink}}</a></td>
+          <td>
+			<form action= "/editStory">
+				<button type="submit" name={{story[0]}} value={{story[1]}}>Edit</button>
+			</form>
+		  </td>
         </tr>
       {% endfor %}
     </table>
