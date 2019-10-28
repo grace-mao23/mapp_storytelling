@@ -5,31 +5,32 @@
     <title>mapp Storytelling!</title>
   </head>
   <body>
-    {% extends myStories.html %}
+    {% extends "allStories.html" %}
 
     {% block title %}
-    <center><h1>Your Stories</h1></center>
+    <center><h1>{{ title }}</h1></center>
     {% endblock %}
 
     {% block searchBar %}
+    {% endblock %}
 
     {% block stories %}
     <center>
     <table>
       <thead>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Read the Story</th>
+        <th>Update</th>
+        <th>Author</th>
+        <th>Timestamp</th>
       </thead>
-      {% for story in {{stories}} %}
+      {% for story in stories %}
         <tr>
           <td>{{story[0]}}</td>
           <td>{{story[1]}}</td>
-          <td><a href="/readStory">{{storyLink}}</a></td>
+          <td>{{story[2]}}</td>
         </tr>
       {% endfor %}
     </table>
     </center>
-    {endblock}
+    {% endblock %}
   </body>
 </html>
