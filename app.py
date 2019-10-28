@@ -120,7 +120,7 @@ def testing():
 
 @app.route("/mystories")
 def myStories():
-    return render_template("mystories.html");
+    return render_template("myStories.html");
 
 
 @app.route("/readStory")

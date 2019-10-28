@@ -180,3 +180,6 @@ fixed roles on README
 
 prathamR -- 2019-10-27 23:18
 fix merge erros
+
+junheeL -- 2019-10-27 23:29
+fixed broken route
