@@ -49,6 +49,8 @@ def login():
 
 @app.route("/logout")
 def loggingOut():
+    if 'username' not in session:
+        return redirect('/login')
     session.pop('username')        #removes session when logging out
     flash("You have successfully logged out!")
     return redirect("/")    #redircts to login page
@@ -65,6 +67,8 @@ def signUp():
 
 @app.route("/createStory", methods=['GET', 'POST'])
 def newStory():
+    if 'username' not in session:
+        return redirect('/login')
     createStoryCode = ""
     #c# takes in inputs and moves to database
     #c# so far only title and story
@@ -88,6 +92,8 @@ def newStory():
 
 @app.route("/viewStory")
 def viewStories():
+    if 'username' not in session:
+        return redirect('/login')
     db = sqlite3.connect("mapp_site.db")
     c = db.cursor()
     c.execute("SELECT * FROM stories")
@@ -97,23 +103,27 @@ def viewStories():
 
 @app.route("/editStory", methods=['GET', 'POST'])
 def editStory():
-	if request.method == "GET":
-		arg1 = list(dict(request.args).keys())[0]
-		arg2 = request.args[arg1]
-		#c# (title, author)
-		info = [arg1, arg2]
-		#x# print (info)
-		db = sqlite3.connect("mapp_site.db")
-		c = db.cursor()
-		c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
-		fetched = c.fetchall()
-		db.close()
-		#x# print(fetched)
-		# need code here to add the edits of the story to the db
-		return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
+    if 'username' not in session:
+        return redirect('/login')
+    if request.method == "GET":
+	arg1 = list(dict(request.args).keys())[0]
+        arg2 = request.args[arg1]
+    	#c# (title, author)
+	info = [arg1, arg2]
+    	#x# print (info)
+        db = sqlite3.connect("mapp_site.db")
+    	c = db.cursor()
+    	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
+	fetched = c.fetchall()
+    	db.close()
+    	#x# print(fetched)
+    	# need code here to add the edits of the story to the db
+    	return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
 @app.route("/mystories")
 def myStories():
+    if 'username' not in session:
+        return redirect('/login')
     allstories=command("SELECT title FROM stories")
     mystories=[]
     for story in allstories:
@@ -126,12 +136,16 @@ def myStories():
 
 @app.route("/addToStory", methods=['GET', 'POST'])
 def addToStory():
+    if 'username' not in session:
+        return redirect('/login')
     title = request.args['title']
     addRow(title , [request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
     return redirect("/readStory?title={}".format(title));
 
 @app.route("/readStory")
 def readStory():
+    if 'username' not in session:
+        return redirect('/login')
     try:
         storyTitle = request.args['title']
     except:

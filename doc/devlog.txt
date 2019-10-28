@@ -215,3 +215,6 @@ fixed a bug where username, timestamp, and content were in random order each sub
 
 junheeL -- 2019-10-28 00:58
 removed all story updates including bugged updates
+
+junheeL -- 2019-10-28 01:02
+stuck a bunch of login checkers everywhere so we don't crash when someone without username attempts to access parts of site inaccessible without loggin in
