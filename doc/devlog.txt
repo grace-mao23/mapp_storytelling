@@ -260,5 +260,10 @@ Remove more apostrophes
 prathamR -- 2019-10-28 08:25
 Remove even more apostrophes
 
+<<<<<<< Updated upstream
 kelvinN -- 2019-10-28 08:16
 fixed david's name capitalization in devlog
+=======
+prathamR -- 2019-10-28 08:36
+Remove apostrophes from the title
+>>>>>>> Stashed changes

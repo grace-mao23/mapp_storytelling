@@ -66,7 +66,7 @@ def newStory():
     createStoryCode = ""
     #c# takes in inputs and moves to database
     if request.method == 'POST':
-        Title, Story = request.form['title'], request.form['introduction']
+        Title, Story = request.form['title'].replace("\'", ""), request.form['introduction']
         createStoryCode = uploadStory(Title, Story)
         flash(createStoryCode)
         #c# returns here if error occurs
@@ -127,7 +127,7 @@ def myStories():
 def addToStory():
     if 'username' not in session:
         return redirect('/login')
-    title = request.args['title']
+    title = request.args['title'].replace("\'", "")
     addRow(title , [request.form['introduction'].replace("\'", ""), session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
     command("UPDATE stories SET story='{}';".format(request.form['introduction'].replace("\'", "")))
     return redirect("/readStory?title={}".format(title));
