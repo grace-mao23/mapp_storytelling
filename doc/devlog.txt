@@ -21,8 +21,14 @@ Added method createAccount(, , ,)
 davidX -- 2019-10-19 18:21
 added method loginAccount( , )
 
+kelvinN -- 2019-10-19 18:32
+fixed inconsistent identations made by david (changed 2 spaces to 4 space indents)
+
+kelvinN -- 2019-10-19 18:41
+added imports (such as sessions and request) and flask app features (such as debug and run)
+
 kelvinN -- 2019-10-19 18:58
-Added routes login and logout routes
+Added base, login and logout routes
 
 kelvinN -- 2019-10-19 19:06
 added sessions and removes sessions when logging out of wesbite
@@ -58,6 +64,9 @@ junheeL -- 2019-10-22 07:56
 Post-Reading Remarks:
 1) will improve communication and documentation so we don't break things accidentally
 2) Acknowledge that code won't be perfect and settle for "working"
+
+kelvinN -- 2019-10-19 18:32
+fixed more inconsistent identations made by david (changed 8 spaces to 4 space indents)
 
 prathamR -- 2019-10-22 08:40
 Create Jinja Inheritance for login and create account pages,links
@@ -128,6 +137,9 @@ Added functional route to /createStory
 davidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
 
+kelvinN -- 18:37
+added allStories.html to display all existing stories in database
+
 kelvinN -- 2019-10-26 19:21
 fixed updateStory.html bugs and changed variable names
 
@@ -135,13 +147,13 @@ kelvinN -- 2019-10-26 19:22
 added errorMessages block
 
 kelvinN -- 2019-10-26 19:45
-Added the route /addToStory
+Added the route /addToStory (which allows edits/additions to existing stories)
 
 kelvinN -- 2019-10-27 14:01
-fixed endblock in allStories.html
+fixed endblock and other syntax errors in allStories.html
 
 kelvinN -- 2019-10-27 14:22
-created route /viewStory
+created route /viewStory to display all stories in /allStories
 
 kelvinN -- 2019-10-27 14:22
 edited /viewStory to display correct title and story
@@ -222,7 +234,7 @@ prathamR -- 2019-10-28 00:41
 recreate mystories in HTML because Junhee is a legend
 
 kelvinN -- 2019-10-28 00:43
-attempted search function in /viewStories but stopped due to possible error in network/error in pulling repo properly from github (results not matching the rest of the team's)
+attempted search function in /viewStories but stopped due to possible error in network or an error in pulling repo properly from github (website results not matching the rest of the team's)
 
 junheeL -- 2019-10-28 00:46
 fixed a bug where username, timestamp, and content were in random order each submission. Changed a set to a list
@@ -249,7 +261,7 @@ davidX -- 2019-10-28 08:15
 Removed extraneous comments and testing
 
 kelvinN -- 2019-10-28 08:16
-added a few comments
+added a few comments in app.py
 
 prathamR -- 2019-10-28 08:18
 Remove single quotes that may cause errors
@@ -260,13 +272,11 @@ Remove more apostrophes
 prathamR -- 2019-10-28 08:25
 Remove even more apostrophes
 
-<<<<<<< Updated upstream
 kelvinN -- 2019-10-28 08:16
 fixed david's name capitalization in devlog
-=======
+
 prathamR -- 2019-10-28 08:36
 Remove apostrophes from the title
->>>>>>> Stashed changes
 
 prathamR -- 2019-10-28 08:38
 Why are there so many apostrophes to remove
