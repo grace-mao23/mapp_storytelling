@@ -96,20 +96,21 @@ def viewStories():
 
 @app.route("/editStory", methods=['GET', 'POST'])
 def editStory():
-	arg1 = list(dict(request.args).keys())[0]
-	arg2 = request.args[arg1]
-	#c# (title, author)
-	info = [arg1, arg2]
-	print (info)
+	if request.method == "GET":
+		arg1 = list(dict(request.args).keys())[0]
+		arg2 = request.args[arg1]
+		#c# (title, author)
+		info = [arg1, arg2]
+		#x# print (info)	
+		db = sqlite3.connect("mapp_site.db")
+		c = db.cursor()
+		c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
+		fetched = c.fetchall()
+		db.close()
+		#x# print(fetched)
+		# need code here to add the edits of the story to the db
+		return render_template("updateStory.html", ttle = info[0], Story = fetched)
 	
-	db = sqlite3.connect("mapp_site.db")
-	c = db.cursor()
-	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
-	fetched = c.fetchall()
-	db.close()
-	print(fetched)
-	# need code here to add the edits of the story to the db
-	return render_template("updateStory.html", ttle = info[0], Story = fetched)
 
 @app.route("/testing")
 def testing():
@@ -249,6 +250,11 @@ def readStory(title, story):
 	db.close()
 	return fetched
 
+#d# takes 4 strings, returns string error message
+#d# changes tables to add newAuthor, and updatedStory
+def updateStory(title, author, newAuthor, updatedStory):
+	return
+
 #c# testing account creation
 #x# print (createAccount("d", "d", "d"))
 #x# print (createAccount("d", "d", "d")) #c# should say exists
@@ -281,4 +287,3 @@ db.close()  #close database
 if __name__ == "__main__":
 	app.debug = True
 	app.run()
-	redirect("/")
