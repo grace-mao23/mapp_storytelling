@@ -206,3 +206,6 @@ fixed mystories
 
 prathamR -- 2019-10-28 00:41
 recreate mystories in HTML because Junhee is s legend
+
+junheeL -- 2019-10-28 00:38
+reinstated mystories, discovered bug where elements are out of order with added updates

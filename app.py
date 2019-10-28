@@ -119,7 +119,6 @@ def myStories():
     for story in allstories:
         authors = command("SELECT user FROM '{}'".format(story[0]))
         authors = map(lambda x: x[0], authors)
-        print(authors)
         if session['username'] in authors:
             mystories.append(command("SELECT * FROM stories WHERE title = '{}'".format(story[0])))
     mystories=map(lambda x:x[0], mystories)
