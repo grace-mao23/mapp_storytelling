@@ -157,3 +157,6 @@ Create table for every new story
 
 prathamR -- 2019-10-27 22:51
 Fix indentation
+
+prathamR -- 2019-10-27 22:56
+Allow for spaces in title

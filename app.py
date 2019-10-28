@@ -159,7 +159,7 @@ def command(command):
 #d# create table and remove table if exists
 #d# takes in a filename and the key(dict)
 def buildTable(name, kc):
-    toBuild = "CREATE TABLE if not exists " + name + "("
+    toBuild = "CREATE TABLE if not exists \"" + name + "\"("
     for el in kc:
         toBuild = toBuild + "\"{}\" {}, ".format(el, kc[el])
     toBuild = toBuild[:-2] + ")"
@@ -168,7 +168,7 @@ def buildTable(name, kc):
 #d# adds data to table, whole row insertion
 #d# takes string table, and list val
 def addRow(table, val):
-    toDo = "INSERT INTO {} VALUES (".format(table)
+    toDo = "INSERT INTO \"{}\" VALUES (".format(table)
     for el in val:
         if type(el) == int:
             toDo = toDo + str(el) + ", "
