@@ -200,3 +200,6 @@ Add links back to homepage for all pages
 
 prathamR -- 2019-10-28 00:26
 Remove mystories due to too complex implementation
+
+junheeL -- 2019-10-28 00:28
+fixed mystories

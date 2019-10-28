@@ -112,6 +112,18 @@ def editStory():
 		# need code here to add the edits of the story to the db
 		return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
+@app.route("/mystories")
+def myStories():
+    allstories=command("SELECT title FROM stories")
+    mystories=[]
+    for story in allstories:
+        authors = command("SELECT user FROM '{}'".format(story[0]))
+        authors = map(lambda x: x[0], authors)
+        print(authors)
+        if session['username'] in authors:
+            mystories.append(command("SELECT * FROM stories WHERE title = '{}'".format(story[0])))
+    mystories=map(lambda x:x[0], mystories)
+    return render_template("myStories.html", stories=mystories)
 
 @app.route("/addToStory", methods=['GET', 'POST'])
 def addToStory():
