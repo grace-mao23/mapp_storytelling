@@ -166,3 +166,6 @@ fixed bug where confirmation message of uploading story would not show up
 
 prathamR -- 2019-10-27 22:59
 Fix merge conflicts
+
+prathamR -- 2019-10-27 23:18
+Implement David's Edit story button

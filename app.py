@@ -118,15 +118,6 @@ def testing():
     info = list(request.args)
     return render_template("testing.html", arg1 = arg1, arg2 = arg2)
 
-    db = sqlite3.connect("mapp_site.db")
-    c = db.cursor()
-    c.execute("SELECT * FROM stories WHERE title = 'hi'")
-    fetched = c.fetchall()
-    print(fetched)
-
-    # need code here to add the edits of the story to the db
-    return render_template("updateStory.html", ttle = fetched[0][0], Story = fetched[0][3])
-
 @app.route("/mystories")
 def myStories():
     return render_template("mystories.html");
@@ -139,8 +130,13 @@ def readStory():
     except:
         flash("Story does not exist!")
         return render_template("homepage.html")
-    story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
-    return render_template("readStory.html", title = storyTitle, stories = story)
+    print(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])))
+    if(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])) == []):
+        author = command("""SELECT author FROM stories WHERE title = \"{}\";""".format(storyTitle))[0][0]
+        return redirect("/editStory?{}={}".format(storyTitle, author))
+    else:
+        story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
+        return render_template("readStory.html", title = storyTitle, stories = story)
 #b# Site Interaction
 #b# ========================================================================
 #b# Database Interaction
