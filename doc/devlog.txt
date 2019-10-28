@@ -136,3 +136,6 @@ fixed endblock in allStories.html
 
 kelvinN -- 2019-10-27 14:22
 created route /viewStory
+
+prathamR -- 2019-10-27 20:32
+Fix minor jinja formatting error
