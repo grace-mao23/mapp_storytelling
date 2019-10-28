@@ -280,3 +280,6 @@ Remove apostrophes from the title
 
 prathamR -- 2019-10-28 08:38
 Why are there so many apostrophes to remove
+
+junheeL -- 2019-10-28 19:48
+reformatted html files

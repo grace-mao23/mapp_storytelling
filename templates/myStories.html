@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>mapp Storytelling!</title>
+    <title>iYagi | My Stories</title>
   </head>
   <body>
     {% extends 'allStories.html' %}
@@ -16,13 +16,13 @@
     <table>
       <thead>
         <th>Title</th>
-        <th>Description</th>
+        <th>OP</th>
         <th>Read the Story</th>
       </thead>
       {% for story in stories %}
         <tr>
           <td>{{story[0]}}</td>
-          <td>{{story[1]}}</td>
+	  <td><i>{{story[1]}}</i></td>
           <td><a href="/readStory?title={{story[0]}}">Read/Edit Here!</a></td>
         </tr>
       {% endfor %}
@@ -35,5 +35,10 @@
     <br>
     <br>
     <center><a href="/">Return to Home!</a></center>
+    <br>
+    <br>
+    <br>
+    <br>
+    &copy; copyright mapp, 2019
   </body>
 </html>

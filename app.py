@@ -141,12 +141,13 @@ def readStory():
     except:
         flash("Story does not exist!")
         return render_template("homepage.html")
-    print(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])))
-    if(command("""SELECT "user" FROM "{}" WHERE  "user" = "{}";""".format(storyTitle, session['username'])) == []):
-        author = command("""SELECT author FROM stories WHERE title = \"{}\";""".format(storyTitle))[0][0]
+    print(storyTitle)
+    print(command("SELECT \"user\" FROM '{}' WHERE  \"user\" = \"{}\";".format(storyTitle, session['username'])))
+    if(command("SELECT \"user\" FROM '{}' WHERE  \"user\" = \"{}\";".format(storyTitle, session['username'])) == []):
+        author = command("SELECT author FROM stories WHERE title = \"{}\";".format(storyTitle))[0][0]
         return redirect("/editStory?{}={}".format(storyTitle, author))
     else:
-        story = command("SELECT \"update\", \"user\", \"time\" FROM \"{}\" ORDER BY \"time\";".format(storyTitle))
+        story = command("SELECT \"update\", \"user\", \"time\" FROM '{}' ORDER BY \"time\";".format(storyTitle))
         return render_template("readStory.html", title = storyTitle, stories = story)
 
 #b# Site Interaction
@@ -295,4 +296,4 @@ db.close()  #close database
 
 if __name__ == "__main__":
 	app.debug = True
-	app.run()
+	app.run(host="0.0.0.0", port=80)
