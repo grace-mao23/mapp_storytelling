@@ -141,10 +141,10 @@ kelvinN -- 2019-10-27 14:01
 fixed endblock in allStories.html
 
 kelvinN -- 2019-10-27 14:22
-created route /viewStory 
+created route /viewStory
 
 kelvinN -- 2019-10-27 14:22
-edited /viewStory to display correct title and story 
+edited /viewStory to display correct title and story
 
 prathamR -- 2019-10-27 20:32
 Fix minor jinja formatting error
@@ -244,3 +244,6 @@ updated design doc: routing updated to match code, sqlite tables for each story 
 
 junheeL -- 2019-10-28 08:12
 removed dysfunctional search bar
+
+DavidX -- 2019-10-28 08:15
+Removed extraneous comments and testing
