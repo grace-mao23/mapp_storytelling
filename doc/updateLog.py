@@ -17,6 +17,13 @@ devlogFile.write(update+"\n")
 
 devlogFile.close()
 
-subprocess.run(['git', 'pull'])
-subprocess.run(['git', 'commit', '-am', update])
-subprocess.run(['git', 'push'])
+subprocess.run(['git', 'add', '.'], cwd='..')
+err = subprocess.run(['git', 'pull'])
+if err != 0:
+    subprocess.run(['git','stash'])
+    subprocess.run(['git', 'pull'])
+    subprocess.run(['git', 'stash', 'pop'])
+    print("FIX THE DAMN MERGE CONFLICTS")
+else:
+    subprocess.run(['git', 'commit', '-m', update])
+    subprocess.run(['git', 'push'])
