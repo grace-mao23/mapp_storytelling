@@ -44,7 +44,6 @@ def login():
     flash(loginCode)
 	#x# render_template('homepage.html') #redirects to homepage if good login
     if loginCode == "Successful login":
-        flash("Hello " + session['username'] + "!")
         return redirect('/')
     return render_template('login.html') #returns to login page if user is not logged in
 
@@ -109,8 +108,7 @@ def editStory():
 		db.close()
 		#x# print(fetched)
 		# need code here to add the edits of the story to the db
-		return render_template("updateStory.html", ttle = info[0], Story = fetched)
-	
+		return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
 
 @app.route("/testing")
 def testing():
