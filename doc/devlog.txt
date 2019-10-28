@@ -206,3 +206,6 @@ fixed mystories
 
 junheeL -- 2019-10-28 00:38
 reinstated mystories, discovered bug where elements are out of order with added updates
+
+junheeL -- 2019-10-28 00:46
+fixed a bug where username, timestamp, and content were in random order each submission. Changed a set to a list

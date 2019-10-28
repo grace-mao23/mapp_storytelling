@@ -127,7 +127,7 @@ def myStories():
 @app.route("/addToStory", methods=['GET', 'POST'])
 def addToStory():
     title = request.args['title']
-    addRow(title ,{ request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')})
+    addRow(title , [request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
     return redirect("/readStory?title={}".format(title));
 
 @app.route("/readStory")
