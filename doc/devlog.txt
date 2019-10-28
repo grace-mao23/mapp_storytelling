@@ -267,3 +267,6 @@ fixed david's name capitalization in devlog
 prathamR -- 2019-10-28 08:36
 Remove apostrophes from the title
 >>>>>>> Stashed changes
+
+prathamR -- 2019-10-28 08:38
+Why are there so many apostrophes to remove

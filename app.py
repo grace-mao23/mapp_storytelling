@@ -67,7 +67,7 @@ def newStory():
     #c# takes in inputs and moves to database
     if request.method == 'POST':
         Title, Story = request.form['title'].replace("\'", ""), request.form['introduction']
-        createStoryCode = uploadStory(Title, Story)
+        createStoryCode = uploadStory(Title.replace("\'", ""), Story.replace("\'", ""))
         flash(createStoryCode)
         #c# returns here if error occurs
         if createStoryCode != "Story uploaded":
