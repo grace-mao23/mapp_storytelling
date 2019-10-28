@@ -191,3 +191,6 @@ fixed myStories.html
 
 junheeL -- 2019-10-27 23:37
 removed semicolon, added a stories field for rendering myStories
+
+prathamR -- 2019-10-27 23:43
+Allow ability to add to stories

@@ -116,6 +116,11 @@ def editStory():
 def myStories():
     return render_template("myStories.html", stories=[])
 
+@app.route("/addToStory", methods=['GET', 'POST'])
+def addToStory():
+    title = request.args['title']
+    addRow(title ,{ request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')})
+    return redirect("/readStory?title={}".format(title));
 
 @app.route("/readStory")
 def readStory():
@@ -129,7 +134,7 @@ def readStory():
         author = command("""SELECT author FROM stories WHERE title = \"{}\";""".format(storyTitle))[0][0]
         return redirect("/editStory?{}={}".format(storyTitle, author))
     else:
-        story = command("SELECT \"update\", \"user\", \"time\" FROM {} ORDER BY \"time\";".format(storyTitle))
+        story = command("SELECT \"update\", \"user\", \"time\" FROM \"{}\" ORDER BY \"time\";".format(storyTitle))
         return render_template("readStory.html", title = storyTitle, stories = story)
 #b# Site Interaction
 #b# ========================================================================

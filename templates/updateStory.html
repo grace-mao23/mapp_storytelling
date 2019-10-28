@@ -16,7 +16,7 @@
     {% endblock %}<br>
 
     <center>{{ lastUpdate }}</center>
-    <form action="/addToStory" method="post">
+    <form action="/addToStory?title={{ttle}}" method="post">
     {% block title %}
     <h3>Title: <i>{{ ttle }}</i></h3>
     {% endblock %}
