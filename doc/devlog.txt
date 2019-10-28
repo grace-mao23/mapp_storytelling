@@ -250,3 +250,6 @@ Removed extraneous comments and testing
 
 prathamR -- 2019-10-28 08:18
 Remove single quotes that may cause errors
+
+prathamR -- 2019-10-28 08:23
+Remove more apostrophes

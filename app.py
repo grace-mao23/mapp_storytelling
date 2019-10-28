@@ -128,7 +128,7 @@ def addToStory():
     if 'username' not in session:
         return redirect('/login')
     title = request.args['title']
-    addRow(title , [request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
+    addRow(title , [request.form['introduction'].replace("\'", ""), session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
     command("UPDATE stories SET story='{}';".format(request.form['introduction'].replace("\'", "")))
     return redirect("/readStory?title={}".format(title));
 
