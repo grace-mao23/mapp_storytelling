@@ -139,3 +139,6 @@ created route /viewStory
 
 prathamR -- 2019-10-27 20:32
 Fix minor jinja formatting error
+
+prathamR -- 2019-10-27 20:33
+Fix updatelog script
