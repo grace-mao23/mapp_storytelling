@@ -194,3 +194,6 @@ removed semicolon, added a stories field for rendering myStories
 
 prathamR -- 2019-10-27 23:43
 Allow ability to add to stories
+
+prathamR -- 2019-10-28 00:14
+Add links back to homepage for all pages

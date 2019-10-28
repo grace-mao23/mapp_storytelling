@@ -102,7 +102,7 @@ def editStory():
 		arg2 = request.args[arg1]
 		#c# (title, author)
 		info = [arg1, arg2]
-		#x# print (info)	
+		#x# print (info)
 		db = sqlite3.connect("mapp_site.db")
 		c = db.cursor()
 		c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
