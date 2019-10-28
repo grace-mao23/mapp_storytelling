@@ -238,3 +238,6 @@ fixed minor issues in devlog
 
 junheeL -- 2019-10-28 01:12
 fixed story updating
+
+junheeL -- 2019-10-28 06:53
+updated design doc: routing updated to match code, sqlite tables for each story added
