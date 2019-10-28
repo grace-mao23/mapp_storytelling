@@ -203,3 +203,6 @@ Remove mystories due to too complex implementation
 
 junheeL -- 2019-10-28 00:28
 fixed mystories
+
+prathamR -- 2019-10-28 00:41
+recreate mystories in HTML because Junhee is s legend
