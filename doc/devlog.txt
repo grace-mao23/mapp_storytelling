@@ -9,16 +9,16 @@ Create file for Dev Log
 prathamR -- 2019-10-18 08:38
 Add script to update devlog
 
-DavidX -- 2019-10-19 13:27
+davidX -- 2019-10-19 13:27
 Added file mapp_site.db for database, added storytelling.py for main code
 
-DavidX -- 2019-10-19 16:49
+davidX -- 2019-10-19 16:49
 Added method Buildtable
 
-DavidX -- 2019-10-19 18:03
+davidX -- 2019-10-19 18:03
 Added method createAccount(, , ,)
 
-DavidX -- 2019-10-19 18:21
+davidX -- 2019-10-19 18:21
 added method loginAccount( , )
 
 kelvinN -- 2019-10-19 18:58
@@ -62,13 +62,13 @@ Post-Reading Remarks:
 prathamR -- 2019-10-22 08:40
 Create Jinja Inheritance for login and create account pages,links
 
-DavidX -- 2019-10-22 18:58
+avidX -- 2019-10-22 18:58
 Have /login working for bad logins
 
-DavidX -- 2019-10-22 19:13
+davidX -- 2019-10-22 19:13
 Modified createAccount for string output and added cases of short usernames and passwords
 
-DavidX -- 2019-10-22 19:19
+davidX -- 2019-10-22 19:19
 Tested account creation; appears to work
 
 prathamR -- 2019-10-23 00:16
@@ -107,25 +107,25 @@ improved updatelog, fixed devlog
 prathamR -- 2019-10-25 08:32
 Add display of previous story to updateStory.html
 
-DavidX -- 2019-10-22 18:58
+davidX -- 2019-10-22 18:58
 Have /login working for bad logins
 
-DavidX -- 2019-10-22 19:13
+davidX -- 2019-10-22 19:13
 Modified createAccount for string output and added cases of short usernames and passwords
 
-DavidX -- 2019-10-22 19:19
+davidX -- 2019-10-22 19:19
 Tested account creation; appears to work
 
-DavidX -- 2019-10-26 13:01
+davidX -- 2019-10-26 13:01
 added uploadStory( , ); moving to test
 
-DavidX -- 2019-10-26 13:19
+davidX -- 2019-10-26 13:19
 Tested uploadStory( , ) for four cases
 
-DavidX -- 2019-10-26 13:50
+davidX -- 2019-10-26 13:50
 Added functional route to /createStory
 
-DavidX -- 2019-10-26 16:53
+davidX -- 2019-10-26 16:53
 Added to stories columns author and time; Added to createStory( , ) adding user and timestamp
 
 kelvinN -- 2019-10-26 19:21
@@ -155,7 +155,7 @@ Fix updatelog script
 kelvinN -- 2019-10-27 21:22
 /viewStory now links to new page for the user to edit story
 
-DavidX -- 2019-10-27 22:30
+davidX -- 2019-10-27 22:30
 changed editStory() and allStories.html to incorporate button to edit(add to) story"
 
 junheeL -- 2019-10-27 22:43
@@ -186,12 +186,12 @@ junheeL -- 2019-10-27 23:10
 fixed roles on README
 
 prathamR -- 2019-10-27 23:18
-Implement David's Edit story button
+Implement david's Edit story button
 
 prathamR -- 2019-10-27 23:18
 fix merge errors
 
-DavidX -- 2019-10-27 23:23
+davidX -- 2019-10-27 23:23
 added method updateStory
 
 junheeL -- 2019-10-27 23:29
@@ -219,7 +219,7 @@ junheeL -- 2019-10-28 00:38
 reinstated mystories, discovered bug where elements are out of order with added updates
 
 prathamR -- 2019-10-28 00:41
-recreate mystories in HTML because Junhee is s legend
+recreate mystories in HTML because Junhee is a legend
 
 kelvinN -- 2019-10-28 00:43
 attempted search function in /viewStories but stopped due to possible error in network/error in pulling repo properly from github (results not matching the rest of the team's)
@@ -245,8 +245,11 @@ updated design doc: routing updated to match code, sqlite tables for each story 
 junheeL -- 2019-10-28 08:12
 removed dysfunctional search bar
 
-DavidX -- 2019-10-28 08:15
+davidX -- 2019-10-28 08:15
 Removed extraneous comments and testing
+
+kelvinN -- 2019-10-28 08:16
+added a few comments
 
 prathamR -- 2019-10-28 08:18
 Remove single quotes that may cause errors
@@ -256,3 +259,6 @@ Remove more apostrophes
 
 prathamR -- 2019-10-28 08:25
 Remove even more apostrophes
+
+kelvinN -- 2019-10-28 08:16
+fixed david's name capitalization in devlog
