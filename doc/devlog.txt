@@ -161,5 +161,8 @@ Fix indentation
 prathamR -- 2019-10-27 22:56
 Allow for spaces in title
 
+junheeL -- 2019-10-27 22:58
+fixed bug where confirmation message of uploading story would not show up
+
 prathamR -- 2019-10-27 22:59
 Fix merge conflicts
