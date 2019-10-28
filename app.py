@@ -129,7 +129,7 @@ def addToStory():
         return redirect('/login')
     title = request.args['title']
     addRow(title , [request.form['introduction'], session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
-    command("UPDATE stories SET story='{}';".format(request.form['introduction']))
+    command("UPDATE stories SET story='{}';".format(request.form['introduction'].replace("\'", "")))
     return redirect("/readStory?title={}".format(title));
 
 @app.route("/readStory")

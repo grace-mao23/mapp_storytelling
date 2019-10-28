@@ -247,3 +247,6 @@ removed dysfunctional search bar
 
 DavidX -- 2019-10-28 08:15
 Removed extraneous comments and testing
+
+prathamR -- 2019-10-28 08:18
+Remove single quotes that may cause errors
