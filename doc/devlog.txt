@@ -181,3 +181,7 @@ fix merge erros
 
 DavidX -- 2019-10-27 23:23
 added method updateStory
+
+junheeL -- 2019-10-27 23:29
+fixed broken route
+
