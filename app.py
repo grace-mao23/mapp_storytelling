@@ -13,6 +13,7 @@ db = sqlite3.connect("mapp_site.db") #open if file exists, otherwise create
 c = db.cursor()
 
 app.secret_key = os.urandom(32)
+
 #b# ========================================================================
 #b# Site Interaction
 
@@ -25,75 +26,66 @@ def loggingIn():
     print("username not in session, redirecting to login")
     return redirect('/login') #returns to login page if user is not logged in
 
-#d# two post inputs username and password
-#d# returns to itself and flashes errors if bad login
-#d# goes to homepage with successful login
 @app.route("/login", methods=['GET', "POST"])
 def login():
     loginCode = ""
     try:
-        loginCode = loginAccount(request.form["username"], request.form["password"])
+        loginCode = loginAccount(request.form["username"], request.form["password"]) #checks if username exists in database and that the password matches it
     except:
         print("yeet")
-    #c# bad login
     flash(loginCode)
     if loginCode == "Successful login":
-        return redirect('/')
+        return redirect('/') #redirects to homepage if successful login
     return render_template('login.html') #returns to login page if user is not logged in
 
 @app.route("/logout")
 def loggingOut():
     if 'username' not in session:
-        return redirect('/login')
-    session.pop('username')        #removes session when logging out
+        return redirect('/login') #redirects to login page if not in session
+    session.pop('username') #removes session when logging out
     flash("You have successfully logged out!")
-    return redirect("/")    #redircts to login page
+    return redirect("/") #redircts to homepage page if logged in and in session
 
 @app.route("/create", methods=['GET', 'POST'])
 def signUp():
     signUpCode = ""
     try:
-        signUpCode = createAccount(request.form["username"], request.form["password"], request.form["password2"])
+        signUpCode = createAccount(request.form["username"], request.form["password"], request.form["password2"]) #adds new account info to database
     except:
         print("yeet")
     flash(signUpCode)
-    return render_template("createAccount.html")
+    return render_template("createAccount.html") #redirects to createAccount page
 
 @app.route("/createStory", methods=['GET', 'POST'])
 def newStory():
     if 'username' not in session:
-        return redirect('/login')
+        return redirect('/login') #if not in sesssion, redirects to login page (if user happens to stumble upon this page without logging in)
     createStoryCode = ""
-    #c# takes in inputs and moves to database
     if request.method == 'POST':
-        Title, Story = request.form['title'].replace("\'", ""), request.form['introduction']
+        Title, Story = request.form['title'].replace("\'", ""), request.form['introduction'] #takes user input
         for char in "!*'();:@&=+$,/?%#[]":
-            Title = Title.replace(char, "")
+            Title = Title.replace(char, "") #replaces "!*'();:@&=+$,/?%#[]" characters with nothing in order to avoid bugs/errors
         createStoryCode = uploadStory(Title.replace("\'", ""), Story.replace("\'", ""))
         flash(createStoryCode)
-        #c# returns here if error occurs
         if createStoryCode != "Story uploaded":
-            #c# keeps input text if error pops up
-            return render_template("createStory.html", ttle = Title, Story = Story)
-        #c# moves to story page
+            return render_template("createStory.html", ttle = Title, Story = Story) #if error occurs, it keeps user input in text box
         else:
             buildTable(Title, {"update": "TEXT", "user" : "TEXT UNIQUE", "time": "TIMESTAMP"})
-            addRow(Title, (Story.replace("\'", ""), session['username'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M')))
-            return render_template("homepage.html")
-    #c# first time on page
+            addRow(Title, (Story.replace("\'", ""), session['username'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M'))) #adds story, time, author (username) to database
+            return render_template("homepage.html") #returns back to homepage after successful creation of story
     else:
-        return render_template("createStory.html", ttle = "", Story = "")
+        return render_template("createStory.html", ttle = "", Story = "") #if 1st time on this page, return empty text field awaiting for user input
 
 @app.route("/viewStory")
 def viewStories():
     if 'username' not in session:
-        return redirect('/login')
+        return redirect('/login') #if not in sesssion, redirects to login page (if user happens to stumble upon this page without logging in)
     db = sqlite3.connect("mapp_site.db")
     c = db.cursor()
     c.execute("SELECT * FROM stories")
     fetch = c.fetchall()
     print(fetch)
-    return render_template("allStories.html", stories = fetch)
+    return render_template("allStories.html", stories = fetch) #redirects to allStories which displays all existing stories in database
 
 @app.route("/editStory", methods=['GET', 'POST'])
 def editStory():
@@ -109,7 +101,7 @@ def editStory():
         c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(info[0],info[1]))
         fetched = c.fetchall()
         db.close()
-        return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0])
+        return render_template("updateStory.html", ttle = info[0], Story = fetched[0][0]) #redirects to page that allows user to update an existing story
 
 @app.route("/mystories")
 def myStories():
@@ -121,28 +113,28 @@ def myStories():
         authors = command("SELECT user FROM '{}'".format(story[0]))
         authors = map(lambda x: x[0], authors)
         if session['username'] in authors:
-            mystories.append(command("SELECT * FROM stories WHERE title = '{}'".format(story[0])))
+            mystories.append(command("SELECT * FROM stories WHERE title = '{}'".format(story[0]))) #selects stories created by the account with that username
     mystories=map(lambda x:x[0], mystories)
-    return render_template("myStories.html", stories=mystories)
+    return render_template("myStories.html", stories=mystories) #redirects to myStories listing out all stories made by this user
 
 @app.route("/addToStory", methods=['GET', 'POST'])
 def addToStory():
     if 'username' not in session:
         return redirect('/login')
     title = request.args['title'].replace("\'", "")
-    addRow(title , [request.form['introduction'].replace("\'", ""), session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')])
-    command("UPDATE stories SET story='{}';".format(request.form['introduction'].replace("\'", "")))
-    return redirect("/readStory?title={}".format(title));
+    addRow(title , [request.form['introduction'].replace("\'", ""), session['username'],  datetime.datetime.now().strftime('%Y-%m-%d %H:%M')]) #adds update to story, the username, and date to database
+    command("UPDATE stories SET story='{}';".format(request.form['introduction'].replace("\'", ""))) #updates story
+    return redirect("/readStory?title={}".format(title)); #redirects to page that allows user to read all updates to story
 
 @app.route("/readStory")
 def readStory():
     if 'username' not in session:
         return redirect('/login')
     try:
-        storyTitle = request.args['title']
+        storyTitle = request.args['title'] #checks if story exists
     except:
         flash("Story does not exist!")
-        return render_template("homepage.html")
+        return render_template("homepage.html") #returns to homepage if not
     print(storyTitle)
     print(command("SELECT \"user\" FROM '{}' WHERE  \"user\" = \"{}\";".format(storyTitle, session['username'])))
     if(command("SELECT \"user\" FROM '{}' WHERE  \"user\" = \"{}\";".format(storyTitle, session['username'])) == []):
@@ -279,7 +271,7 @@ def updateStory(title, author, newAuthor, updateToStory):
 	c.execute("SELECT story FROM stories WHERE title = \'{}\' AND author = \'{}\'".format(title, author))
 	fetched = c.fetchall()
 	#c# update authors, and story text
-	authors = author
+	authors = author 
 	if "and" in fetched[1]:
 		andIndex = author.index(" and")
 		authors = author[:andIndex] + author[andIndex + 4:]

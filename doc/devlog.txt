@@ -292,3 +292,6 @@ removed illegal characters from title, purged story list
 
 junheeL -- 2019-10-28 19:44
 fixed error caused by forgetting to update stored value
+
+kelvinN -- 2019-10-27 20:45
+added most of comments in the code
