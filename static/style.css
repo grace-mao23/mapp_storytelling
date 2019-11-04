@@ -2,4 +2,25 @@ body {
   background-color: #F2F3AE;
   color: #3C1518;
   font-family: "Courier New";
+  text-align: center;
+}
+
+.error {
+  color: #6E0E0A;
+  border-style: double;
+  width: 30%;
+  margin-left: 35%;
+}
+
+.makeAccount {
+  padding: 50px;
+  font-style: italic;
+}
+
+.footer {
+  margin-left: 40%;
+  width: 20%;
+  padding: 10px;
+  border-style: solid;
+  border-color: #D58936;
 }

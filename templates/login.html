@@ -4,20 +4,22 @@
     <meta charset="utf-8">
     <title>iYagi | Login</title>
 
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel= "stylesheet" type= "text/css" href= "/static/style.css">
 
   </head>
   <body>
     {% block heading %}
-    	<center><h1><br>Login to <i>iYagi</i></h1></center>
+    	<h1><br>Login to <i>iYagi</i></h1>
     	<br>
     {% endblock %}
 
-    {% block errorMessages %}
-      {% for error in get_flashed_messages() %}
-            <center><h4><font color="red">{{error}}</font></h4></center>
-      {% endfor %}
-    {% endblock %}
+    <div class="error">
+      {% block errorMessages %}
+        {% for error in get_flashed_messages() %}
+            <h4>{{error}}</h4>
+        {% endfor %}
+      {% endblock %}
+    </div>
 
     {%block inputs%}
       <br>
@@ -30,13 +32,14 @@
       </center>
     {%endblock%}
 
+    <div class="makeAccount">
     {%block redirect %}
-    <center><i>Don't have an account? Create one <a href="/create" method="post">here!</a></i></center>
+      Don't have an account? Create one <a href="/create" method="post">here!</a>
     {%endblock%}
-    <br>
-    <br>
-    <br>
-    <br>
-    &copy; copyright mapp, 2019
+    </div>
+
+    <div class="footer">
+      &copy; copyright mapp, 2019
+    </div>
   </body>
 </html>
